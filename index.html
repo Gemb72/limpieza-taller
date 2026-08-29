@@ -79,6 +79,16 @@ input[type="date"],input[type="password"],input[type="text"]{width:100%;padding:
 .reg-table tr:last-child td{border-bottom:none}
 .reg-table .muted{color:#64748b}
 .reg-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:12px}
+.filtros{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.filtros label{font-size:0.62rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.04em}
+.filtros select,.filtros input[type="date"]{width:100%;padding:8px 10px;font-size:0.8rem;border:1px solid #e2e8f0;border-radius:8px;background:#fff;margin-bottom:0}
+.login-label{font-size:0.78rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.04em;margin:4px 0 10px}
+.sub.pend{color:#d97706;font-weight:700}
+.sub.ok{color:#059669;font-weight:600}
+.reg-table{font-size:0.72rem;background:#faf8f4;border:1px solid #e8e4dc}
+.reg-table th{background:#f3efe6;color:#6b7280;font-size:0.62rem;padding:10px 8px;border-bottom:1px solid #e8e4dc}
+.reg-table td{padding:9px 8px;border-bottom:1px solid #eeeae2;white-space:nowrap}
+.home-title-row h1{font-size:1.05rem}
 </style>
 </head>
 <body>
@@ -87,18 +97,16 @@ input[type="date"],input[type="password"],input[type="text"]{width:100%;padding:
   <div class="content">
     <div class="home-title-row">
       <button type="button" id="btnRestringida" class="btn-lock" title="Area restringida" aria-label="Area restringida"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" stroke="#0f172a" stroke-width="2"/><path d="M8 11V7a4 4 0 118 0v4" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/></svg></button>
-      <h1>REGISTRO DE LIMPIEZA</h1>
+      <h1>OFFICE & LIMPIEZA</h1>
     </div>
-    <button type="button" class="menu-card" id="btnOffice" style="width:100%;text-align:left;font:inherit;color:inherit">
-      <div class="menu-icon">🧹</div>
-      <div class="info"><div class="titulo">OFFICE & LIMPIEZA</div><div class="sub">Detalle de tareas</div></div>
-    </button>
+    <div class="login-label">Inicia sesion</div>
+    <div id="listaNombres"></div>
 </div>
 </div>
 
 <div id="nombres" class="screen">
   <div class="header"><div class="nombre">Inicia sesion</div><button class="btn btn-atras" type="button" id="btnAtrasNombres">Salir</button></div>
-  <div class="content" id="listaNombres"></div>
+  <div class="content" id="listaNombresOld"></div>
 </div>
 
 <div id="pinTrabajador" class="screen">
@@ -134,7 +142,7 @@ input[type="date"],input[type="password"],input[type="text"]{width:100%;padding:
 <div id="frecuencias" class="screen">
   <div class="header">
     <div><div class="nombre" id="nombreUser">—</div><div class="fecha" id="fechaHoy"></div></div>
-    <button class="btn btn-atras" type="button" id="btnSalirFreq">Salir</button>
+    <button class="btn btn-atras" type="button" id="btnSalirFreq">Volver</button>
   </div>
   <div class="content">
     <input type="text" class="buscador" id="buscador" placeholder="Buscar zona o tarea...">
@@ -207,6 +215,11 @@ input[type="date"],input[type="password"],input[type="text"]{width:100%;padding:
   <div class="header"><div class="nombre">Registros</div><button class="btn btn-atras" type="button" id="btnAtrasDescarga">Salir</button></div>
   <div class="content">
     <button class="btn btn-descarga" type="button" style="margin-bottom:14px" id="btnExportar">Descargar CSV</button>
+    <div class="filtros">
+      <div><label>Fecha</label><input type="date" id="filtroFecha"></div>
+      <div><label>Area</label><select id="filtroArea"><option value="">Todas</option></select></div>
+      <div><label>Responsable</label><select id="filtroResp"><option value="">Todos</option></select></div>
+    </div>
     <div id="listaRegistros"></div>
     <p id="msgDescarga" style="text-align:center;font-size:0.78rem;color:#64748b;margin-top:14px"></p>
   </div>
@@ -398,7 +411,7 @@ function anioDe(f){return (f||"").slice(0,4)}
 function fechaVista(f){return (f||"").split("-").reverse().join("/")}
 function frecuenciaDe(r){
   if(r.tipo==="profunda") return "SEMANAL (PROFUNDA)";
-  if(r.tipo==="asumido") return "DIARIA (ASUMIDO)";
+  if(r.tipo==="asumido") return "DIARIA";
   var t=(DATOS[r.zona]||[]).find(function(x){return x.equipo===r.equipo});
   if(!t) return "";
   if(t.grupo==="diaria") return "DIARIA";
@@ -409,7 +422,7 @@ function frecuenciaDe(r){
 }
 function claseDe(tipo){
   if(tipo==="profunda") return "LIMPIO (en profundidad)";
-  if(tipo==="asumido") return "Asumido";
+  if(tipo==="asumido") return "LIMPIO";
   if(tipo==="diaria"||tipo==="normal"||!tipo) return "LIMPIO";
   return tipo.toUpperCase();
 }
@@ -422,9 +435,12 @@ function horaAleatoria(zona){
   return String(Math.floor(t/60)).padStart(2,"0")+":"+String(t%60).padStart(2,"0");
 }
 function personaAsumida(zona){
-  if(zona==="HELADERIA") return "Heladero";
-  if(zona==="PANADERIA") return "Panadero";
-  return "Trabajador del area";
+  return "Personal del area";
+}
+function responsableDe(r){
+  var p=r.persona||"";
+  if(p==="Heladero"||p==="Panadero"||p==="Trabajador del area"||p==="Trabajador del sector") return "Personal del area";
+  return p;
 }
 function guardarLocal(){localStorage.setItem("limpieza_v29",JSON.stringify(registros))}
 
@@ -500,7 +516,7 @@ function irA(p){
     document.getElementById("msgDescarga").textContent="";
     cargarRegistros().then(renderRegistros);
   }
-  if(p==="menu"){user=null;pendientePin=null}
+  if(p==="menu"){user=null;pendientePin=null;modoTrabajo=null;renderNombres()}
   mostrar(p);
 }
 
@@ -520,12 +536,47 @@ function validarPinTrabajador(){
   } else document.getElementById("pinTrabError").style.display="block";
 }
 
+function registrosFiltrados(){
+  var f=(document.getElementById("filtroFecha")||{}).value||"";
+  var a=(document.getElementById("filtroArea")||{}).value||"";
+  var p=(document.getElementById("filtroResp")||{}).value||"";
+  return registros.filter(function(r){
+    if(f && r.fecha!==f) return false;
+    if(a && r.zona!==a) return false;
+    if(p && responsableDe(r)!==p) return false;
+    return true;
+  });
+}
+function llenarFiltrosRegistro(){
+  var areas=[], resps=[];
+  registros.forEach(function(r){
+    if(r.zona && areas.indexOf(r.zona)<0) areas.push(r.zona);
+    var rp=responsableDe(r);
+    if(rp && resps.indexOf(rp)<0) resps.push(rp);
+  });
+  areas.sort(function(x,y){return x.localeCompare(y,"es")});
+  resps.sort(function(x,y){return x.localeCompare(y,"es")});
+  var sa=document.getElementById("filtroArea");
+  var sr=document.getElementById("filtroResp");
+  if(sa){
+    var cur=sa.value;
+    sa.innerHTML='<option value="">Todas</option>'+areas.map(function(z){return '<option value="'+z+'">'+z+'</option>'}).join("");
+    sa.value=cur||"";
+  }
+  if(sr){
+    var cur2=sr.value;
+    sr.innerHTML='<option value="">Todos</option>'+resps.map(function(z){return '<option value="'+z+'">'+z+'</option>'}).join("");
+    sr.value=cur2||"";
+  }
+}
 function renderRegistros(){
   const cont=document.getElementById("listaRegistros");
-  if(!registros.length){cont.innerHTML='<div style="text-align:center;color:#94a3b8;padding:30px">No hay registros</div>';return}
-  const orden=registros.slice().sort(function(a,b){return b.fecha.localeCompare(a.fecha)||(b.hora||"").localeCompare(a.hora||"")});
+  llenarFiltrosRegistro();
+  var lista=registrosFiltrados();
+  if(!lista.length){cont.innerHTML='<div style="text-align:center;color:#94a3b8;padding:30px">No hay registros</div>';return}
+  const orden=lista.slice().sort(function(a,b){return a.fecha.localeCompare(b.fecha)||(a.hora||"").localeCompare(b.hora||"")});
   var html='<div class="reg-scroll"><table class="reg-table"><thead><tr>'+
-    '<th>Año</th><th>Mes</th><th>Fecha</th><th>Hora</th><th>Frecuencia</th><th>Area</th><th>Tarea</th><th>Clase</th><th>Responsable</th>'+
+    '<th>AÑO</th><th>MES</th><th>FECHA</th><th>HORA</th><th>FRECUENCIA</th><th>AREA</th><th>TAREA</th><th>CLASE</th><th>RESPONSABLE</th>'+
     '</tr></thead><tbody>';
   orden.forEach(function(r){
     html+='<tr>'+
@@ -537,7 +588,7 @@ function renderRegistros(){
       '<td>'+r.zona+'</td>'+
       '<td>'+r.equipo+'</td>'+
       '<td>'+claseDe(r.tipo)+'</td>'+
-      '<td>'+r.persona+'</td>'+
+      '<td>'+responsableDe(r)+'</td>'+
       '</tr>';
   });
   html+='</tbody></table></div>';
@@ -632,6 +683,24 @@ function contarTipo(zona,equipo,tipoLabel,grupo){
 
 
 
+
+function tareaCompleta(zona,t){
+  if(t.soloProf) return contar(zona,t.equipo,"profunda")>=1;
+  if(t.dual) return contar(zona,t.equipo,"diaria")>=1 && contar(zona,t.equipo,"profunda")>=1;
+  if(t.meta>1 && t.metaLabels){
+    return t.metaLabels.every(function(lab){return contarTipo(zona,t.equipo,lab,t.grupo)>=1});
+  }
+  var meta=t.meta>0?t.meta:1;
+  return contar(zona,t.equipo,t.grupo==="diaria"?"diaria":"normal")>=meta;
+}
+function pendientesZona(zona,grupo){
+  return (DATOS[zona]||[]).filter(function(t){
+    if(t.asumido) return false;
+    if(grupo && t.grupo!==grupo) return false;
+    return !tareaCompleta(zona,t);
+  }).length;
+}
+
 function labelGrupo(g){
   if(g==="diaria") return "Diaria";
   if(g==="2xsemana") return "2 x semana";
@@ -647,7 +716,8 @@ function renderZonasTodas(){
     if(n) zonas[zona]=n;
   });
   cont.innerHTML=Object.keys(zonas).sort(function(a,b){return a.localeCompare(b,"es")}).map(function(z){
-    return '<div class="zona-card" data-zona="'+z+'"><div class="icon">📁</div><div class="info"><div class="titulo">'+z+'</div><div class="sub">'+zonas[z]+' tareas</div></div></div>';
+    var pend=pendientesZona(z,null);
+    return '<div class="zona-card" data-zona="'+z+'"><div class="icon">📁</div><div class="info"><div class="titulo">'+z+'</div><div class="sub '+(pend?"pend":"ok")+'">'+(pend?pend+" pendientes":"Completo")+'</div></div></div>';
   }).join("")||'<div style="text-align:center;color:#94a3b8;padding:30px">No hay areas</div>';
   cont.querySelectorAll(".zona-card").forEach(function(card){
     card.addEventListener("click",function(){entrarZona(card.getAttribute("data-zona"))});
@@ -765,7 +835,8 @@ function renderZonas(){
     if(t.length) zonas[zona]=t.length;
   });
   cont.innerHTML=Object.keys(zonas).sort(function(a,b){return a.localeCompare(b,"es")}).map(function(z){
-    return '<div class="zona-card" data-zona="'+z+'"><div class="icon">📁</div><div class="info"><div class="titulo">'+z+'</div><div class="sub">'+zonas[z]+' tareas</div></div></div>';
+    var pend=pendientesZona(z,freqActual);
+    return '<div class="zona-card" data-zona="'+z+'"><div class="icon">📁</div><div class="info"><div class="titulo">'+z+'</div><div class="sub '+(pend?"pend":"ok")+'">'+(pend?pend+" pendientes":"Completo")+'</div></div></div>';
   }).join("")||'<div style="text-align:center;color:#94a3b8;padding:30px">No hay tareas</div>';
   cont.querySelectorAll(".zona-card").forEach(function(card){
     card.addEventListener("click",function(){entrarZona(card.getAttribute("data-zona"))});
@@ -947,7 +1018,7 @@ async function exportarCSV(){
   if(!registros.length){document.getElementById("msgDescarga").textContent="No hay registros.";return}
   let csv="AÑO;MES;FECHA;HORA;FRECUENCIA;AREA;TAREA;CLASE;RESPONSABLE\n";
   registros.slice().sort(function(a,b){return a.fecha.localeCompare(b.fecha)||(a.hora||"").localeCompare(b.hora||"")}).forEach(function(r){
-    csv+=anioDe(r.fecha)+";"+mesNombre(r.fecha)+";"+fechaVista(r.fecha)+";"+(r.hora||"—")+";"+frecuenciaDe(r)+";"+r.zona+";"+r.equipo+";"+claseDe(r.tipo)+";"+r.persona+"\n";
+    csv+=anioDe(r.fecha)+";"+mesNombre(r.fecha)+";"+fechaVista(r.fecha)+";"+(r.hora||"—")+";"+frecuenciaDe(r)+";"+r.zona+";"+r.equipo+";"+claseDe(r.tipo)+";"+responsableDe(r)+"\n";
   });
   const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="limpieza_"+hoyStr+".csv";a.click();
@@ -956,15 +1027,12 @@ async function exportarCSV(){
   document.getElementById("msgDescarga").textContent="CSV descargado. Registros borrados.";
 }
 
-(function(){
-  var el=document.getElementById("btnOffice");
-  if(!el) return;
-  function goOffice(e){if(e){e.preventDefault();e.stopPropagation()}irA("nombres")}
-  el.addEventListener("click",goOffice);
-  el.addEventListener("touchend",function(e){goOffice(e)},{passive:false});
-})();
 document.getElementById("btnRestringida").addEventListener("click",function(){irA("pin")});
 document.getElementById("btnAtrasNombres").addEventListener("click",function(){irA("menu")});
+["filtroFecha","filtroArea","filtroResp"].forEach(function(id){
+  var el=document.getElementById(id);
+  if(el) el.addEventListener("change",renderRegistros);
+});
 document.getElementById("btnAtrasPinTrab").addEventListener("click",function(){irA("nombres")});
 document.getElementById("btnEntrarPinTrab").addEventListener("click",validarPinTrabajador);
 document.getElementById("pinTrabInput").addEventListener("keydown",function(e){if(e.key==="Enter")validarPinTrabajador()});
@@ -993,7 +1061,7 @@ document.getElementById("pinInput").addEventListener("keydown",function(e){if(e.
 document.getElementById("btnAtrasDescarga").addEventListener("click",function(){irA("menu")});
 document.getElementById("btnExportar").addEventListener("click",exportarCSV);
 
-cargarRegistros();
+cargarRegistros();renderNombres();
 })();
 </script>
 </body>
