@@ -9,7 +9,7 @@
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
 body{background:#f4f6f9;color:#1e293b;max-width:480px;margin:0 auto;min-height:100vh;font-size:0.875rem}
 h1{font-size:1.1rem;font-weight:700;text-align:center;margin-bottom:18px;letter-spacing:0.03em;color:#0f172a;text-transform:uppercase}
-.menu-card,.zona-card,.card,.freq-card{background:#fff;border-radius:12px;padding:13px 15px;margin-bottom:8px;border:1px solid #e2e8f0;display:flex;align-items:center;gap:12px;cursor:pointer;transition:background .15s;-webkit-tap-highlight-color:rgba(0,0,0,0.08);position:relative;z-index:1;-webkit-user-select:none;user-select:none}
+.menu-card,.zona-card,.card,.freq-card{background:#fff;border-radius:10px;padding:6px 8px;margin-bottom:4px;border:1px solid #e2e8f0;display:flex;align-items:center;gap:12px;cursor:pointer;transition:background .15s;-webkit-tap-highlight-color:rgba(0,0,0,0.08);position:relative;z-index:1;-webkit-user-select:none;user-select:none}
 .menu-card:active,.zona-card:active,.freq-card:active{background:#f8fafc}
 .home-title-row{display:flex;align-items:flex-start;justify-content:center;gap:6px;margin-bottom:18px}
 .home-title-row h1{margin-bottom:0;text-align:left;flex:0 1 auto}
@@ -18,17 +18,19 @@ h1{font-size:1.1rem;font-weight:700;text-align:center;margin-bottom:18px;letter-
 .btn-lock:active{opacity:1}
 .btn-lock svg{display:block}
 .btn-lock:active{opacity:0.85;background:#f1f5f9}
-.menu-icon,.icon{width:38px;height:38px;border-radius:10px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0}
+.menu-icon,.icon{width:30px;height:30px;border-radius:8px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:0.95rem;flex-shrink:0}
 .info{flex:1;min-width:0}
-.titulo{font-weight:700;font-size:0.88rem;color:#0f172a}
+.titulo{font-weight:700;font-size:0.8rem;color:#0f172a}
 .sub{font-size:0.72rem;color:#64748b;margin-top:1px}
 .freq{font-size:0.68rem;font-weight:700;color:#3b82f6;margin-top:2px;text-transform:uppercase;letter-spacing:0.03em}
 .contador{font-size:0.72rem;font-weight:600;margin-top:2px}
 .contador.ok{color:#059669}.contador.pend{color:#d97706}
-.badge{font-size:0.68rem;font-weight:700;padding:3px 9px;border-radius:6px;background:#dcfce7;color:#166534}
-.btn{border:none;border-radius:8px;padding:7px 11px;font-weight:700;font-size:0.72rem;cursor:pointer;white-space:nowrap}
+.badge{font-size:0.62rem;font-weight:700;padding:2px 7px;border-radius:5px;background:#dcfce7;color:#166534}
+.btn{border:none;border-radius:6px;padding:3px 8px;font-weight:700;font-size:0.65rem;cursor:pointer;white-space:nowrap;line-height:1.15;min-height:0}
 .btn-hecho{background:#16a34a;color:#fff}
-.btn-prof{background:#dc2626;color:#fff;line-height:1.2}
+.btn-aceite{background:#d97706;color:#fff}
+.badge-aceite{background:#ffedd5;color:#9a3412}
+.btn-prof{background:#dc2626;color:#fff;line-height:1.1;padding:3px 8px}
 .btn-atras{background:#f1f5f9;color:#475569;font-size:0.72rem;padding:6px 11px;font-weight:600;border:1px solid #e2e8f0}
 .btn-descarga{background:#1e293b;color:#fff;width:100%;padding:13px;font-size:0.85rem;border-radius:10px}
 .btn-olvido{background:#fde68a;color:#0f172a;width:100%;padding:12px;margin-bottom:12px;font-size:0.8rem;border-radius:10px;line-height:1.35;text-align:center;border:1px solid #fbbf24}.btn-olvido strong{display:block;font-size:0.88rem;font-weight:700;margin-bottom:2px;color:#0f172a}.btn-olvido span{display:block;font-size:0.72rem;font-weight:600;color:#1e293b}
@@ -37,7 +39,14 @@ h1{font-size:1.1rem;font-weight:700;text-align:center;margin-bottom:18px;letter-
 .btns{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
 .action-row{display:flex;align-items:center;justify-content:flex-end;gap:8px}
 .freq-label{font-size:0.58rem;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap}
-.card-task{align-items:flex-start!important}
+.card-task{align-items:center!important;flex-wrap:nowrap;gap:8px;min-height:0}
+.card-task .info{flex:1;min-width:0}
+.card-task .titulo{font-size:0.75rem;line-height:1.2;word-break:break-word}
+.card-task .btns{width:auto;margin-top:0;flex-shrink:0;align-items:flex-end}
+.card-task .action-row{justify-content:flex-end;width:auto;gap:4px;align-items:center;flex-wrap:wrap}
+.card-task .btn,.card-task .badge{flex-shrink:0}
+.btn-stack{display:flex;flex-direction:column;gap:3px;align-items:stretch;min-width:7.2rem}
+.btn-stack .btn,.btn-stack .badge{width:100%;text-align:center;box-sizing:border-box}
 
 .screen{display:none}.screen.active{display:block}
 .header{position:sticky;top:0;z-index:100;background:#f4f6f9;padding:14px 16px 11px;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center}
@@ -48,7 +57,7 @@ h1{font-size:1.1rem;font-weight:700;text-align:center;margin-bottom:18px;letter-
 input[type="date"],input[type="password"],input[type="text"]{width:100%;padding:11px 13px;font-size:0.85rem;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:12px;background:#fff}
 .buscador{width:100%;padding:11px 13px;font-size:0.85rem;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:12px;background:#fff}
 .buscador:focus,input:focus{outline:none;border-color:#94a3b8}
-.btn-prof small{display:block;font-size:0.62rem;font-weight:600;opacity:0.95}
+.btn-prof small{display:inline;font-size:0.58rem;font-weight:600;opacity:0.95;margin-left:2px}
 .grupo-titulo{font-size:0.7rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.06em;margin:16px 0 8px 2px}
 .grupo-titulo:first-child{margin-top:4px}
 .reg-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px 14px;margin-bottom:8px}
@@ -63,6 +72,13 @@ input[type="date"],input[type="password"],input[type="text"]{width:100%;padding:
 .pin-box{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px 16px;margin-top:8px}
 .pin-box p{font-size:0.8rem;color:#64748b;margin-bottom:12px;text-align:center}
 .pin-error{color:#dc2626;font-size:0.78rem;text-align:center;margin-top:8px;display:none}
+
+.reg-table{width:100%;border-collapse:collapse;font-size:0.68rem;background:#fff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden}
+.reg-table th{background:#f1f5f9;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.03em;padding:8px 6px;text-align:left;border-bottom:1px solid #e2e8f0;white-space:nowrap}
+.reg-table td{padding:7px 6px;border-bottom:1px solid #f1f5f9;color:#0f172a;vertical-align:top}
+.reg-table tr:last-child td{border-bottom:none}
+.reg-table .muted{color:#64748b}
+.reg-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:12px}
 </style>
 </head>
 <body>
@@ -81,7 +97,7 @@ input[type="date"],input[type="password"],input[type="text"]{width:100%;padding:
 </div>
 
 <div id="nombres" class="screen">
-  <div class="header"><div class="nombre">¿Quien eres?</div><button class="btn btn-atras" type="button" id="btnAtrasNombres">Salir</button></div>
+  <div class="header"><div class="nombre">Inicia sesion</div><button class="btn btn-atras" type="button" id="btnAtrasNombres">Salir</button></div>
   <div class="content" id="listaNombres"></div>
 </div>
 
@@ -94,6 +110,24 @@ input[type="date"],input[type="password"],input[type="text"]{width:100%;padding:
       <button class="btn btn-descarga" type="button" id="btnEntrarPinTrab">Entrar</button>
       <div class="pin-error" id="pinTrabError">PIN incorrecto</div>
     </div>
+  </div>
+</div>
+
+
+<div id="modo" class="screen">
+  <div class="header">
+    <div><div class="nombre" id="nombreModo">—</div><div class="fecha">Elige como trabajar hoy</div></div>
+    <button class="btn btn-atras" type="button" id="btnSalirModo">Salir</button>
+  </div>
+  <div class="content">
+    <button type="button" class="menu-card" id="btnModoFreq" style="width:100%;text-align:left;font:inherit;color:inherit;margin-bottom:8px">
+      <div class="menu-icon">📅</div>
+      <div class="info"><div class="titulo">Por frecuencia</div><div class="sub">Diaria, semanal, mensual...</div></div>
+    </button>
+    <button type="button" class="menu-card" id="btnModoArea" style="width:100%;text-align:left;font:inherit;color:inherit">
+      <div class="menu-icon">📁</div>
+      <div class="info"><div class="titulo">Por zona</div><div class="sub">Cocina, camaras, heladeria...</div></div>
+    </button>
   </div>
 </div>
 
@@ -115,9 +149,15 @@ input[type="date"],input[type="password"],input[type="text"]{width:100%;padding:
     <div><div class="nombre" id="freqActual">—</div><div class="fecha" id="nombreUser2"></div></div>
     <button class="btn btn-atras" type="button" id="btnVolverZonas">Volver</button>
   </div>
-  <div class="content" id="listaZonas"></div>
+  <div class="content">
+    <div id="areaExtras" style="display:none">
+      <input type="text" class="buscador" id="buscadorAreas" placeholder="Buscar zona o tarea...">
+      <div id="resultadosBusquedaAreas" style="display:none;margin-bottom:12px"></div>
+      <button class="btn btn-olvido" type="button" id="btnOlvidoAreas"><strong>¿Lo olvidaste?</strong><span>Clic aqui para registrar tareas realizadas antes de hoy</span></button>
+    </div>
+    <div id="listaZonas"></div>
+  </div>
 </div>
-
 <div id="tareas" class="screen">
   <div class="header">
     <div><div class="nombre" id="zonaActual">—</div><div class="fecha" id="freqActual2"></div></div>
@@ -185,9 +225,8 @@ try{
 }catch(e){console.warn("Supabase no disponible",e)}
 
 const PIN_ACCESO="2468";
-const PERSONAS={"Aurora Monghit":"1111","Elita Llanos":"2222","Gregorio Nuida":"3333","Issis Lopez":"4444","Marina Mendez":"5555","Miriam Flores Guerra":"6666"};
+const PERSONAS={"Aurora Monghit":"1111","Elita Llanos":"2222","Gregorio Nuida":"3333","Issis Lopez":"4444","Marina Mendez":"5555","Miriam Flores":"6666"};
 const FRECUENCIAS=[
-  {id:"aluso",label:"Tras su uso",icon:"⚡"},
   {id:"diaria",label:"Diaria",icon:"📅"},
   {id:"2xsemana",label:"Dos veces por semana",icon:"🔁"},
   {id:"semanal",label:"Semanal",icon:"📆"},
@@ -201,27 +240,27 @@ const DATOS={
     {equipo:"Suelo",freq:"SEMANAL",icon:"🧹",meta:1,grupo:"semanal"}
   ],
   "BODEGA":[{equipo:"Bodega",freq:"MENSUAL",icon:"📦",meta:1,grupo:"mensual"}],
-  "CAMARAS":[
-    {equipo:"Arcon",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true},
-    {equipo:"Camara Carnes",freq:"DIARIA / PROFUNDA",icon:"🥩",meta:1,grupo:"diaria",dual:true},
-    {equipo:"Camara Congelador",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true},
-    {equipo:"Camara Frutas & Verduras",freq:"DIARIA / PROFUNDA",icon:"🥬",meta:1,grupo:"diaria",dual:true},
-    {equipo:"Camara Preparacion",freq:"DIARIA / PROFUNDA",icon:"🥗",meta:1,grupo:"diaria",dual:true},
-    {equipo:"Congelador pasillo 1",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true},
-    {equipo:"Congelador pasillo 2",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true},
-    {equipo:"Congelador pasillo 3",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true},
-    {equipo:"Congelador pasillo 4",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true},
-    {equipo:"Congelador pasillo 5",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true},
-    {equipo:"Maquina de hielo 1",freq:"DOS veces por semana",icon:"🧊",meta:2,grupo:"2xsemana"},
-    {equipo:"Maquina de hielo 2",freq:"DOS veces por semana",icon:"🧊",meta:2,grupo:"2xsemana"},
-    {equipo:"Maquina de hielo 3",freq:"DOS veces por semana",icon:"🧊",meta:2,grupo:"2xsemana"}
+  "CAMARAS & PASILLO":[
+    {equipo:"Arcon",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true,subgrupo:"PASILLO"},
+    {equipo:"Camara Carnes",freq:"DIARIA / PROFUNDA",icon:"🥩",meta:1,grupo:"diaria",dual:true,subgrupo:"CAMARA"},
+    {equipo:"Camara Congelador",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true,subgrupo:"CAMARA"},
+    {equipo:"Camara frutas/verduras",freq:"DIARIA / PROFUNDA",icon:"🥬",meta:1,grupo:"diaria",dual:true,subgrupo:"CAMARA"},
+    {equipo:"Camara Preparacion",freq:"DIARIA / PROFUNDA",icon:"🥗",meta:1,grupo:"diaria",dual:true,subgrupo:"CAMARA"},
+    {equipo:"Congelador pasillo 1",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true,subgrupo:"PASILLO"},
+    {equipo:"Congelador pasillo 2",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true,subgrupo:"PASILLO"},
+    {equipo:"Congelador pasillo 3",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true,subgrupo:"PASILLO"},
+    {equipo:"Congelador pasillo 4",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true,subgrupo:"PASILLO"},
+    {equipo:"Congelador pasillo 5",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true,subgrupo:"PASILLO"},
+    {equipo:"Maquina de hielo 1",freq:"DOS veces por semana",icon:"🧊",meta:2,grupo:"2xsemana",subgrupo:"PASILLO"},
+    {equipo:"Maquina de hielo 2",freq:"DOS veces por semana",icon:"🧊",meta:2,grupo:"2xsemana",subgrupo:"PASILLO"},
+    {equipo:"Maquina de hielo 3",freq:"DOS veces por semana",icon:"🧊",meta:2,grupo:"2xsemana",subgrupo:"PASILLO"}
   ],
   "COCINA":[
     {equipo:"Abatidor",freq:"DIARIA",icon:"❄️",meta:1,grupo:"diaria"},
     {equipo:"Basculas",freq:"DIARIA",icon:"⚖️",meta:1,grupo:"diaria"},
     {equipo:"Campana extractora",freq:"DOS veces por semana",icon:"💨",meta:2,grupo:"2xsemana"},
-    {equipo:"Freidora 1 (Izquierda)",freq:"DIARIA",icon:"🍟",meta:1,grupo:"diaria"},
-    {equipo:"Freidoras 2 (Derecha)",freq:"DIARIA",icon:"🍟",meta:1,grupo:"diaria"},
+    {equipo:"Freidora 1 (Izquierda)",freq:"DIARIA",icon:"🍟",meta:2,grupo:"diaria",metaLabels:["Limpio","Cambio de aceite"]},
+    {equipo:"Freidoras 2 (Derecha)",freq:"DIARIA",icon:"🍟",meta:2,grupo:"diaria",metaLabels:["Limpio","Cambio de aceite"]},
     {equipo:"Fuegos e Inducciones",freq:"DIARIA",icon:"🔥",meta:1,grupo:"diaria"},
     {equipo:"Horno inferior",freq:"DIARIA",icon:"🔥",meta:1,grupo:"diaria"},
     {equipo:"Horno superior",freq:"DIARIA",icon:"🔥",meta:1,grupo:"diaria"},
@@ -234,19 +273,17 @@ const DATOS={
     {equipo:"Paredes y estantes",freq:"SEMANAL",icon:"🧱",meta:1,grupo:"semanal"},
     {equipo:"Pelapatatas",freq:"DIARIA",icon:"🥔",meta:1,grupo:"diaria"},
     {equipo:"Plancha",freq:"DIARIA",icon:"🍳",meta:1,grupo:"diaria"},
-    {equipo:"Robot Coupe",freq:"Tras su uso",icon:"⚙️",meta:1,grupo:"aluso"},
     {equipo:"Suelo",freq:"DIARIA",icon:"🧹",meta:1,grupo:"diaria"},
     {equipo:"Tablas de corte y utiles",freq:"DIARIA",icon:"🔪",meta:1,grupo:"diaria"},
-    {equipo:"Thermomix",freq:"Tras su uso",icon:"🍳",meta:1,grupo:"aluso"},
     {equipo:"Timbre 1",freq:"DIARIA / PROFUNDA",icon:"🌡️",meta:1,grupo:"diaria",dual:true},
     {equipo:"Timbre 2",freq:"DIARIA / PROFUNDA",icon:"🌡️",meta:1,grupo:"diaria",dual:true},
     {equipo:"Timbre 3",freq:"DIARIA / PROFUNDA",icon:"🌡️",meta:1,grupo:"diaria",dual:true},
     {equipo:"Zumera",freq:"DIARIA",icon:"🍊",meta:1,grupo:"diaria"}
   ],
   "COMEDOR PERSONAL":[
-    {equipo:"Microondas",freq:"DIARIA (2 veces)",icon:"📡",meta:2,grupo:"diaria"},
-    {equipo:"Mesas",freq:"DIARIA (2 veces)",icon:"🪑",meta:2,grupo:"diaria"},
-    {equipo:"Suelo",freq:"DIARIA (2 veces)",icon:"🧹",meta:2,grupo:"diaria"}
+    {equipo:"Microondas",freq:"DIARIA (2 veces)",icon:"📡",meta:2,grupo:"diaria",metaLabels:["Limpieza Comida","Limpieza cena"]},
+    {equipo:"Mesas",freq:"DIARIA (2 veces)",icon:"🪑",meta:2,grupo:"diaria",metaLabels:["Limpieza Comida","Limpieza cena"]},
+    {equipo:"Suelo",freq:"DIARIA (2 veces)",icon:"🧹",meta:2,grupo:"diaria",metaLabels:["Limpieza Comida","Limpieza cena"]}
   ],
   "CUARTO DE BASURA":[
     {equipo:"Bidon aceite usado",freq:"DIARIA",icon:"🛢️",meta:1,grupo:"diaria"},
@@ -257,7 +294,6 @@ const DATOS={
   "CUARTO FRIO":[
     {equipo:"Abatidor",freq:"DIARIA",icon:"❄️",meta:1,grupo:"diaria"},
     {equipo:"Basculas",freq:"DIARIA",icon:"⚖️",meta:1,grupo:"diaria"},
-    {equipo:"Cortafiambre",freq:"Tras su uso",icon:"🔪",meta:1,grupo:"aluso"},
     {equipo:"Envasadora al vacio",freq:"DIARIA",icon:"📦",meta:1,grupo:"diaria"},
     {equipo:"Fregaderos y lavamanos",freq:"DIARIA",icon:"🚰",meta:1,grupo:"diaria"},
     {equipo:"Mesas de trabajo 1",freq:"DIARIA",icon:"🪑",meta:1,grupo:"diaria"},
@@ -265,20 +301,19 @@ const DATOS={
     {equipo:"Nevera 1",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true},
     {equipo:"Nevera 2",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true},
     {equipo:"Paredes y estantes",freq:"DIARIA",icon:"🧱",meta:1,grupo:"diaria"},
-    {equipo:"Picadora",freq:"Tras su uso",icon:"⚙️",meta:1,grupo:"aluso"},
     {equipo:"Suelo",freq:"DIARIA",icon:"🧹",meta:1,grupo:"diaria"},
     {equipo:"Sumidero",freq:"SEMANAL",icon:"🚰",meta:1,grupo:"semanal"},
     {equipo:"Timbre 1",freq:"DIARIA / PROFUNDA",icon:"🌡️",meta:1,grupo:"diaria",dual:true},
     {equipo:"Timbre 2",freq:"DIARIA / PROFUNDA",icon:"🌡️",meta:1,grupo:"diaria",dual:true}
   ],
-  "EXPEDICION":[
+  "TRANSPORTE":[
     {equipo:"Cajones isotermos",freq:"DIARIA",icon:"📦",meta:1,grupo:"diaria"},
     {equipo:"Carro transporte hielo 1",freq:"DIARIA",icon:"🧊",meta:1,grupo:"diaria"},
     {equipo:"Carro transporte hielo 2",freq:"DIARIA",icon:"🧊",meta:1,grupo:"diaria"},
     {equipo:"Furgoneta grande",freq:"SEMANAL",icon:"🚚",meta:1,grupo:"semanal"},
     {equipo:"Furgoneta pequena",freq:"SEMANAL",icon:"🚚",meta:1,grupo:"semanal"}
   ],
-  "GENERAL":[{equipo:"Insectocaptores y trampas",freq:"MENSUAL",icon:"🐛",meta:1,grupo:"mensual"}],
+  "PLAGAS":[{equipo:"Insectocaptores y trampas",freq:"MENSUAL",icon:"🐛",meta:1,grupo:"mensual"}],
   "HALL / ZONA BARRA":[
     {equipo:"Salon",freq:"DIARIA",icon:"🚪",meta:1,grupo:"diaria"},
     {equipo:"Timbre 1",freq:"DIARIA / PROFUNDA",icon:"🌡️",meta:1,grupo:"diaria",dual:true},
@@ -323,7 +358,6 @@ const DATOS={
     {equipo:"Fermentadora & Nevera 1",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"semanal",soloProf:true},
     {equipo:"Fermentadora & Nevera 2",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"semanal",soloProf:true},
     {equipo:"Fermentadora & Nevera 3",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"semanal",soloProf:true},
-    {equipo:"Horno auxiliar",freq:"Tras su uso",icon:"🔥",meta:1,grupo:"aluso"},
     {equipo:"Horno principal",freq:"DIARIA / PROFUNDA",icon:"🔥",meta:1,grupo:"semanal",soloProf:true},
     {equipo:"Lavamanos y fregaderos",freq:"DIARIA",icon:"🚰",meta:1,grupo:"diaria",asumido:true},
     {equipo:"Mesa de trabajo",freq:"DIARIA",icon:"🪑",meta:1,grupo:"diaria",asumido:true},
@@ -345,13 +379,40 @@ const DATOS={
   ]
 };
 
-let user=null,freqActual=null,zonaActual=null,olvidoZona=null,olvidoEquipo=null,pendientePin=null;
+let user=null,modoTrabajo=null,freqActual=null,zonaActual=null,olvidoZona=null,olvidoEquipo=null,pendientePin=null;
 let registros=JSON.parse(localStorage.getItem("limpieza_v29")||"[]");
 
 function hoy(){return new Date().toISOString().slice(0,10)}
 function getWeekKey(f){const d=new Date(f+"T12:00:00");const o=new Date(d.getFullYear(),0,1);return d.getFullYear()+"-W"+Math.ceil((((d-o)/86400000)+o.getDay()+1)/7)}
 function getMonthKey(f){return f.slice(0,7)}
-function claseDe(tipo){return tipo==="profunda"?"LIMPIO (en profundidad)":"LIMPIO"}
+
+
+
+function mesNombre(f){
+  var m=["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"];
+  var p=(f||"").split("-");
+  var i=parseInt(p[1],10)-1;
+  return (i>=0&&i<12)?m[i]:"";
+}
+function anioDe(f){return (f||"").slice(0,4)}
+function fechaVista(f){return (f||"").split("-").reverse().join("/")}
+function frecuenciaDe(r){
+  if(r.tipo==="profunda") return "SEMANAL (PROFUNDA)";
+  if(r.tipo==="asumido") return "DIARIA (ASUMIDO)";
+  var t=(DATOS[r.zona]||[]).find(function(x){return x.equipo===r.equipo});
+  if(!t) return "";
+  if(t.grupo==="diaria") return "DIARIA";
+  if(t.grupo==="2xsemana") return "2 X SEMANA";
+  if(t.grupo==="semanal") return "SEMANAL";
+  if(t.grupo==="mensual") return "MENSUAL";
+  return (t.freq||t.grupo||"").toUpperCase();
+}
+function claseDe(tipo){
+  if(tipo==="profunda") return "LIMPIO (en profundidad)";
+  if(tipo==="asumido") return "Asumido";
+  if(tipo==="diaria"||tipo==="normal"||!tipo) return "LIMPIO";
+  return tipo.toUpperCase();
+}
 function horaAleatoria(zona){
   let minTotal,maxTotal;
   if(zona==="HELADERIA"){minTotal=15*60+15;maxTotal=15*60+40}
@@ -404,12 +465,29 @@ function mostrar(id){
 
 function irA(p){
   if(p==="nombres") renderNombres();
+  if(p==="modo"){
+    document.getElementById("nombreModo").textContent=user||"";
+    modoTrabajo=null;freqActual=null;
+  }
   if(p==="frecuencias"){
     document.getElementById("buscador").value="";
     document.getElementById("resultadosBusqueda").style.display="none";
     renderFrecuencias();
   }
-  if(p==="zonas") renderZonas();
+  if(p==="zonas"){
+    document.getElementById("nombreUser2").textContent=user||"";
+    var extras=document.getElementById("areaExtras");
+    if(modoTrabajo==="area"){
+      document.getElementById("freqActual").textContent="Elige area";
+      if(extras) extras.style.display="block";
+      document.getElementById("btnVolverZonas").textContent="Volver";
+      renderZonasTodas();
+    } else {
+      if(extras) extras.style.display="none";
+      document.getElementById("btnVolverZonas").textContent="Volver";
+      renderZonas();
+    }
+  }
   if(p==="pin"){
     document.getElementById("pinInput").value="";
     document.getElementById("pinError").style.display="none";
@@ -438,7 +516,7 @@ function validarPinTrabajador(){
     document.getElementById("nombreUser2").textContent=user;
     document.getElementById("fechaHoy").textContent=new Date().toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"});
     pendientePin=null;
-    cargarRegistros().then(function(){irA("frecuencias")});
+    cargarRegistros().then(function(){irA("modo")});
   } else document.getElementById("pinTrabError").style.display="block";
 }
 
@@ -446,11 +524,27 @@ function renderRegistros(){
   const cont=document.getElementById("listaRegistros");
   if(!registros.length){cont.innerHTML='<div style="text-align:center;color:#94a3b8;padding:30px">No hay registros</div>';return}
   const orden=registros.slice().sort(function(a,b){return b.fecha.localeCompare(a.fecha)||(b.hora||"").localeCompare(a.hora||"")});
-  cont.innerHTML=orden.map(function(r){
-    const cl=claseDe(r.tipo);const cls=r.tipo==="profunda"?"profunda":"basica";
-    return '<div class="reg-card"><div class="reg-top"><span class="reg-fecha">'+r.fecha.split("-").reverse().join("/")+'</span><span class="reg-hora">'+(r.hora||"—")+'</span></div><div class="reg-linea"><b>'+r.persona+'</b></div><div class="reg-linea">'+r.zona+' · '+r.equipo+'</div><span class="reg-clase '+cls+'">'+cl+'</span></div>';
-  }).join("");
+  var html='<div class="reg-scroll"><table class="reg-table"><thead><tr>'+
+    '<th>Año</th><th>Mes</th><th>Fecha</th><th>Hora</th><th>Frecuencia</th><th>Area</th><th>Tarea</th><th>Clase</th><th>Responsable</th>'+
+    '</tr></thead><tbody>';
+  orden.forEach(function(r){
+    html+='<tr>'+
+      '<td>'+anioDe(r.fecha)+'</td>'+
+      '<td>'+mesNombre(r.fecha)+'</td>'+
+      '<td>'+fechaVista(r.fecha)+'</td>'+
+      '<td class="muted">'+(r.hora||"—")+'</td>'+
+      '<td>'+frecuenciaDe(r)+'</td>'+
+      '<td>'+r.zona+'</td>'+
+      '<td>'+r.equipo+'</td>'+
+      '<td>'+claseDe(r.tipo)+'</td>'+
+      '<td>'+r.persona+'</td>'+
+      '</tr>';
+  });
+  html+='</tbody></table></div>';
+  cont.innerHTML=html;
 }
+
+
 
 function renderNombres(){
   document.getElementById("listaNombres").innerHTML=Object.keys(PERSONAS).map(function(p){
@@ -517,7 +611,7 @@ function contar(zona,equipo,tipo){
     else if(tipo==="profunda"){if(getWeekKey(r.fecha)===getWeekKey(hoyStr)&&r.tipo==="profunda")c++}
     else{
       const t=DATOS[zona].find(function(x){return x.equipo===equipo});if(!t)return;
-      if(t.grupo==="diaria"||t.grupo==="aluso"){if(r.fecha===hoyStr)c++}
+      if(t.grupo==="diaria"){if(r.fecha===hoyStr)c++}
       else if(t.grupo==="2xsemana"||t.grupo==="semanal"){if(getWeekKey(r.fecha)===getWeekKey(hoyStr))c++}
       else if(t.grupo==="mensual"){if(getMonthKey(r.fecha)===getMonthKey(hoyStr))c++}
       else c++;
@@ -525,10 +619,104 @@ function contar(zona,equipo,tipo){
   });
   return c;
 }
+function contarTipo(zona,equipo,tipoLabel,grupo){
+  const hoyStr=hoy();
+  return registros.filter(function(r){
+    if(r.zona!==zona||r.equipo!==equipo||r.tipo!==tipoLabel)return false;
+    if(grupo==="diaria") return r.fecha===hoyStr;
+    if(grupo==="2xsemana"||grupo==="semanal") return getWeekKey(r.fecha)===getWeekKey(hoyStr);
+    if(grupo==="mensual") return getMonthKey(r.fecha)===getMonthKey(hoyStr);
+    return r.fecha===hoyStr;
+  }).length;
+}
+
+
+
+function labelGrupo(g){
+  if(g==="diaria") return "Diaria";
+  if(g==="2xsemana") return "2 x semana";
+  if(g==="semanal") return "Semanal";
+  if(g==="mensual") return "Mensual";
+  return g;
+}
+function renderZonasTodas(){
+  const cont=document.getElementById("listaZonas");
+  const zonas={};
+  Object.keys(DATOS).forEach(function(zona){
+    const n=DATOS[zona].filter(function(x){return !x.asumido}).length;
+    if(n) zonas[zona]=n;
+  });
+  cont.innerHTML=Object.keys(zonas).sort(function(a,b){return a.localeCompare(b,"es")}).map(function(z){
+    return '<div class="zona-card" data-zona="'+z+'"><div class="icon">📁</div><div class="info"><div class="titulo">'+z+'</div><div class="sub">'+zonas[z]+' tareas</div></div></div>';
+  }).join("")||'<div style="text-align:center;color:#94a3b8;padding:30px">No hay areas</div>';
+  cont.querySelectorAll(".zona-card").forEach(function(card){
+    card.addEventListener("click",function(){entrarZona(card.getAttribute("data-zona"))});
+  });
+}
+function buscarAreas(){
+  const q=(document.getElementById("buscadorAreas").value||"").toLowerCase().trim();
+  const cont=document.getElementById("resultadosBusquedaAreas");
+  if(!q){cont.style.display="none";cont.innerHTML="";return}
+  let html="";
+  Object.keys(DATOS).sort(function(a,b){return a.localeCompare(b,"es")}).forEach(function(zona){
+    if(zona.toLowerCase().includes(q))
+      html+='<div class="zona-card" data-zona="'+zona+'"><div class="icon">📁</div><div class="info"><div class="titulo">'+zona+'</div><div class="sub">Zona</div></div></div>';
+  });
+  Object.keys(DATOS).forEach(function(zona){
+    DATOS[zona].forEach(function(t){
+      if(t.asumido)return;
+      if(t.equipo.toLowerCase().includes(q))
+        html+='<div class="card" style="cursor:pointer" data-zona="'+zona+'"><div class="icon">'+t.icon+'</div><div class="info"><div class="titulo">'+t.equipo+'</div><div class="sub">'+zona+' · '+t.freq+'</div></div></div>';
+    });
+  });
+  cont.innerHTML=html||'<div style="text-align:center;color:#94a3b8;padding:12px;font-size:0.8rem">No se encontro</div>';
+  cont.style.display="block";
+  cont.querySelectorAll("[data-zona]").forEach(function(el){
+    el.addEventListener("click",function(){entrarZona(el.getAttribute("data-zona"))});
+  });
+}
+function renderTareasPorArea(){
+  let lista=(DATOS[zonaActual]||[]).filter(function(t){return !t.asumido});
+  var ordenG=["diaria","2xsemana","semanal","mensual"];
+  var html="";
+  var hasSub=lista.some(function(t){return t.subgrupo});
+  function renderGrupoLista(items){
+    var h="";
+    ordenG.forEach(function(g){
+      var sub=items.filter(function(t){return t.grupo===g});
+      if(!sub.length)return;
+      h+='<div class="grupo-titulo">'+labelGrupo(g)+'</div>';
+      sub.sort(function(a,b){return a.equipo.localeCompare(b.equipo,"es")});
+      sub.forEach(function(t){h+=cardTareaHTML(t)});
+    });
+    return h;
+  }
+  if(hasSub){
+    var ordenSub=["CAMARA","PASILLO"];
+    var groups={};
+    lista.forEach(function(t){var g=t.subgrupo||"OTROS";(groups[g]=groups[g]||[]).push(t)});
+    ordenSub.forEach(function(sg){
+      if(!groups[sg]||!groups[sg].length)return;
+      html+='<div class="grupo-titulo" style="color:#0f172a;font-size:0.78rem;border-bottom:1px solid #e2e8f0;padding-bottom:6px">'+sg+'</div>';
+      html+=renderGrupoLista(groups[sg]);
+      delete groups[sg];
+    });
+    Object.keys(groups).sort().forEach(function(sg){
+      html+='<div class="grupo-titulo" style="color:#0f172a;font-size:0.78rem;border-bottom:1px solid #e2e8f0;padding-bottom:6px">'+sg+'</div>';
+      html+=renderGrupoLista(groups[sg]);
+    });
+  } else {
+    html=renderGrupoLista(lista);
+  }
+  document.getElementById("listaTareas").innerHTML=html||'<div style="text-align:center;color:#94a3b8;padding:30px">No hay tareas</div>';
+  document.querySelectorAll("#listaTareas button[data-equipo]").forEach(function(btn){
+    btn.addEventListener("click",function(){marcar(btn.getAttribute("data-equipo"),btn.getAttribute("data-tipo"))});
+  });
+}
 
 function renderZonas(){
   const cont=document.getElementById("listaZonas");
-  if(freqActual==="aluso"||freqActual==="2xsemana"||freqActual==="mensual"){
+  if(freqActual==="2xsemana"||freqActual==="mensual"){
     const porZona={};
     Object.keys(DATOS).forEach(function(zona){
       const t=DATOS[zona].filter(function(x){return x.grupo===freqActual&&!x.asumido});
@@ -539,15 +727,35 @@ function renderZonas(){
       html+='<div class="grupo-titulo">'+zona+'</div>';
       porZona[zona].slice().sort(function(a,b){return a.equipo.localeCompare(b.equipo,"es")}).forEach(function(t){
         const r=contar(zona,t.equipo,"normal");
-        const completo=freqActual==="aluso"?r>=1:(t.meta>0&&r>=t.meta);
-        var lab=freqActual==="aluso"?"Tras su uso":(freqActual==="2xsemana"?"Dos veces por semana":"Mensual");
-        var btn=completo?'<span class="badge">Hecho ✓</span>':'<button class="btn btn-hecho" type="button" data-zona="'+zona+'" data-equipo="'+t.equipo.replace(/"/g,"&quot;")+'">Limpio</button>';
-        html+='<div class="card card-task" style="cursor:default"><div class="icon">'+t.icon+'</div><div class="info"><div class="titulo">'+t.equipo+'</div><div class="contador '+(completo?"ok":"pend")+'">'+(freqActual==="aluso"?(completo?"Hecho hoy":"Pendiente"):("Realizadas "+r+" de "+t.meta))+'</div></div><div class="btns"><div class="action-row"><span class="freq-label">'+lab+'</span>'+btn+'</div></div></div>';
+        var meta=t.meta>0?t.meta:1;
+        var lab=freqActual==="2xsemana"?"2 x semana":"Mensual";
+        var btns="";
+        if(meta>1){
+          var stack="";
+          var labels=(t.metaLabels&&t.metaLabels.length===meta)?t.metaLabels:(meta===2?["Limpio 1er dia","Limpio 2do dia"]:null);
+          for(var i=0;i<meta;i++){
+            var txt=labels?labels[i]:("Limpio "+(i+1));
+            var ya=contarTipo(zona,t.equipo,txt,t.grupo);
+            var vis=txt;
+            if(txt==="Limpio"){vis=ya?"Hecho":"Pendiente";}
+            else if(ya){vis=txt+" ✓";}
+            if(ya) stack+='<span class="badge'+(txt==="Cambio de aceite"?" badge-aceite":"")+'">'+vis+'</span>';
+            else {
+              var clsBtn=txt==="Cambio de aceite"?"btn-aceite":"btn-hecho";
+              var txtBtn=txt==="Limpio"?"Pendiente":txt;
+              stack+='<button class="btn '+clsBtn+'" type="button" data-zona="'+zona+'" data-equipo="'+t.equipo.replace(/"/g,"&quot;")+'" data-tipo="'+txt.replace(/"/g,"&quot;")+'">'+txtBtn+'</button>';
+            }
+          }
+          btns='<div class="btn-stack">'+stack+'</div>';
+        } else {
+          btns=(r>=1)?'<span class="badge">Hecho</span>':'<button class="btn btn-hecho" type="button" data-zona="'+zona+'" data-equipo="'+t.equipo.replace(/"/g,"&quot;")+'" data-tipo="normal">Pendiente</button>';
+        }
+        html+='<div class="card card-task" style="cursor:default"><div class="icon">'+t.icon+'</div><div class="info"><div class="titulo">'+t.equipo+'</div></div><div class="btns"><div class="action-row"><span class="freq-label">'+lab+'</span>'+btns+'</div></div></div>';
       });
     });
     cont.innerHTML=html||'<div style="text-align:center;color:#94a3b8;padding:30px">No hay tareas</div>';
-    cont.querySelectorAll("button.btn-hecho").forEach(function(btn){
-      btn.addEventListener("click",function(){marcarDirecto(btn.getAttribute("data-zona"),btn.getAttribute("data-equipo"))});
+    cont.querySelectorAll("button.btn-hecho,button.btn-aceite").forEach(function(btn){
+      btn.addEventListener("click",function(){marcarDirecto(btn.getAttribute("data-zona"),btn.getAttribute("data-equipo"),btn.getAttribute("data-tipo"))});
     });
     return;
   }
@@ -563,13 +771,28 @@ function renderZonas(){
     card.addEventListener("click",function(){entrarZona(card.getAttribute("data-zona"))});
   });
 }
-function entrarZona(z){zonaActual=z;document.getElementById("zonaActual").textContent=z;renderTareas();mostrar("tareas")}
+function entrarZona(z){
+  zonaActual=z;
+  document.getElementById("zonaActual").textContent=z;
+  if(modoTrabajo==="area"){
+    document.getElementById("freqActual2").textContent="Todas las frecuencias";
+    freqActual=null;
+    renderTareasPorArea();
+  } else {
+    document.getElementById("freqActual2").textContent=document.getElementById("freqActual").textContent;
+    renderTareas();
+  }
+  mostrar("tareas");
+}
 
 async function marcar(equipo,tipo){
+  var tDef=(DATOS[zonaActual]||[]).find(function(x){return x.equipo===equipo});
+  var especial=tipo&&tipo!=="normal"&&tipo!=="diaria"&&tipo!=="profunda"&&tipo!=="asumido";
   if(tipo==="profunda"){
     if(contar(zonaActual,equipo,"profunda")>=1){renderTareas();return}
+  } else if(especial){
+    if(contarTipo(zonaActual,equipo,tipo,tDef?tDef.grupo:"diaria")>=1){renderTareas();return}
   } else {
-    var tDef=(DATOS[zonaActual]||[]).find(function(x){return x.equipo===equipo});
     var limite=(tDef&&tDef.meta)?tDef.meta:1;
     var contados=contar(zonaActual,equipo,tipo==="diaria"?"diaria":"normal");
     if(contados>=limite){renderTareas();return}
@@ -588,38 +811,93 @@ async function marcar(equipo,tipo){
     }
   }
   await cargarRegistros();
-  renderTareas();
+  if(modoTrabajo==="area"||freqActual==null) renderTareasPorArea(); else renderTareas();
 }
 
-async function marcarDirecto(zona,equipo){
-  if(contar(zona,equipo,"normal")>=1){renderZonas();return}
-  await insertarRegistro({fecha:hoy(),hora:new Date().toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"}),persona:user,zona:zona,equipo:equipo,tipo:"normal"});
+async function marcarDirecto(zona,equipo,tipoMark){
+  var tDef=(DATOS[zona]||[]).find(function(x){return x.equipo===equipo});
+  var tipo=tipoMark||"normal";
+  var especial=tipo!=="normal"&&tipo!=="diaria"&&tipo!=="profunda";
+  if(especial){
+    if(contarTipo(zona,equipo,tipo,tDef?tDef.grupo:"2xsemana")>=1){renderZonas();return}
+  } else {
+    var limite=(tDef&&tDef.meta)?tDef.meta:1;
+    if(contar(zona,equipo,"normal")>=limite){renderZonas();return}
+  }
+  await insertarRegistro({fecha:hoy(),hora:new Date().toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"}),persona:user,zona:zona,equipo:equipo,tipo:tipo});
   await cargarRegistros();
   renderZonas();
+}
+
+function cardTareaHTML(t){
+  var eq=t.equipo.replace(/"/g,"&quot;");
+  var porArea=(typeof freqActual!=="undefined"&&freqActual==null);
+  if(t.soloProf){
+    const p=contar(zonaActual,t.equipo,"profunda");
+    var btn=p<1?'<button class="btn btn-prof" type="button" data-equipo="'+eq+'" data-tipo="profunda">Pendiente <small>(profunda)</small></button>':'<span class="badge">Hecho (profunda)</span>';
+    var lab=porArea?'':('<span class="freq-label">Semanal</span>');
+    return '<div class="card card-task" style="cursor:default"><div class="icon">'+t.icon+'</div><div class="info"><div class="titulo">'+t.equipo+'</div></div><div class="btns"><div class="action-row">'+lab+btn+'</div></div></div>';
+  }
+  if(t.dual){
+    const d=contar(zonaActual,t.equipo,"diaria");const p=contar(zonaActual,t.equipo,"profunda");
+    var bD=d<1?'<button class="btn btn-hecho" type="button" data-equipo="'+eq+'" data-tipo="diaria">Pendiente</button>':'<span class="badge">Hecho</span>';
+    var bP=p<1?'<button class="btn btn-prof" type="button" data-equipo="'+eq+'" data-tipo="profunda">Pendiente <small>(profunda)</small></button>':'<span class="badge">Hecho (profunda)</span>';
+    if(porArea){
+      return '<div class="card card-task" style="cursor:default"><div class="icon">'+t.icon+'</div><div class="info"><div class="titulo">'+t.equipo+'</div></div><div class="btns"><div class="btn-stack">'+bD+bP+'</div></div></div>';
+    }
+    return '<div class="card card-task" style="cursor:default"><div class="icon">'+t.icon+'</div><div class="info"><div class="titulo">'+t.equipo+'</div></div><div class="btns"><div class="btn-stack"><div class="action-row"><span class="freq-label">Diario</span>'+bD+'</div><div class="action-row"><span class="freq-label">Semanal</span>'+bP+'</div></div></div></div>';
+  }
+  const r=contar(zonaActual,t.equipo,"normal");
+  var meta=t.meta>0?t.meta:1;
+  var labelFreq=t.grupo==="diaria"?(meta>1?"Diario":"Diario"):(t.grupo==="semanal"?"Semanal":(t.grupo==="2xsemana"?"2 x semana":(t.grupo==="mensual"?"Mensual":t.freq)));
+  if(meta>1){
+    var labels=(t.metaLabels&&t.metaLabels.length===meta)?t.metaLabels:(meta===2?["Limpio 1er dia","Limpio 2do dia"]:null);
+    var stack="";
+    for(var i=0;i<meta;i++){
+      var txt=labels?labels[i]:("Limpio "+(i+1));
+      var ya=contarTipo(zonaActual,t.equipo,txt,t.grupo);
+      var vis=txt;
+      if(txt==="Limpio"){vis=ya?"Hecho":"Pendiente";}
+      else if(ya){vis=txt+" ✓";}
+      if(ya) stack+='<span class="badge'+(txt==="Cambio de aceite"?" badge-aceite":"")+'">'+vis+'</span>';
+      else {
+        var clsBtn=txt==="Cambio de aceite"?"btn-aceite":"btn-hecho";
+        var txtBtn=txt==="Limpio"?"Pendiente":txt;
+        stack+='<button class="btn '+clsBtn+'" type="button" data-equipo="'+eq+'" data-tipo="'+txt.replace(/"/g,"&quot;")+'">'+txtBtn+'</button>';
+      }
+    }
+    var lab=porArea?'':('<span class="freq-label">'+labelFreq+'</span>');
+    return '<div class="card card-task" style="cursor:default"><div class="icon">'+t.icon+'</div><div class="info"><div class="titulo">'+t.equipo+'</div></div><div class="btns"><div class="action-row">'+lab+'<div class="btn-stack">'+stack+'</div></div></div></div>';
+  }
+  var completo=r>=meta;
+  var btn=completo?'<span class="badge">Hecho</span>':'<button class="btn btn-hecho" type="button" data-equipo="'+eq+'" data-tipo="normal">Pendiente</button>';
+  var lab=porArea?'':('<span class="freq-label">'+labelFreq+'</span>');
+  return '<div class="card card-task" style="cursor:default"><div class="icon">'+t.icon+'</div><div class="info"><div class="titulo">'+t.equipo+'</div></div><div class="btns"><div class="action-row">'+lab+btn+'</div></div></div>';
 }
 
 function renderTareas(){
   let lista=(DATOS[zonaActual]||[]).filter(function(t){return t.grupo===freqActual&&!t.asumido});
   lista.sort(function(a,b){return a.equipo.localeCompare(b.equipo,"es")});
-  document.getElementById("listaTareas").innerHTML=lista.map(function(t){
-    var eq=t.equipo.replace(/"/g,"&quot;");
-    if(t.soloProf){
-      const p=contar(zonaActual,t.equipo,"profunda");
-      var btn=p<1?'<button class="btn btn-prof" type="button" data-equipo="'+eq+'" data-tipo="profunda">Limpio<br><small>(en profundidad)</small></button>':'<span class="badge">Hecho ✓</span>';
-      return '<div class="card card-task" style="cursor:default"><div class="icon">'+t.icon+'</div><div class="info"><div class="titulo">'+t.equipo+'</div><div class="contador '+(p>=1?"ok":"pend")+'">'+(p>=1?"Hecho esta semana":"Pendiente")+'</div></div><div class="btns"><div class="action-row"><span class="freq-label">Una vez por semana</span>'+btn+'</div></div></div>';
-    }
-    if(t.dual){
-      const d=contar(zonaActual,t.equipo,"diaria");const p=contar(zonaActual,t.equipo,"profunda");
-      var bD=d<1?'<button class="btn btn-hecho" type="button" data-equipo="'+eq+'" data-tipo="diaria">Limpio</button>':'<span class="badge">Hecho ✓</span>';
-      var bP=p<1?'<button class="btn btn-prof" type="button" data-equipo="'+eq+'" data-tipo="profunda">Limpio<br><small>(en profundidad)</small></button>':'<span class="badge">Hecho ✓</span>';
-      return '<div class="card card-task" style="cursor:default"><div class="icon">'+t.icon+'</div><div class="info"><div class="titulo">'+t.equipo+'</div></div><div class="btns"><div class="action-row"><span class="freq-label">Diario</span>'+bD+'</div><div class="action-row"><span class="freq-label">Una vez por semana</span>'+bP+'</div></div></div>';
-    }
-    const r=contar(zonaActual,t.equipo,"normal");const completo=t.meta>0&&r>=t.meta;
-    var labelFreq=t.grupo==="diaria"?(t.meta>1?"Diario ("+t.meta+" veces)":"Diario"):(t.grupo==="semanal"?"Una vez por semana":(t.grupo==="2xsemana"?"Dos veces por semana":(t.grupo==="mensual"?"Mensual":(t.grupo==="aluso"?"Tras su uso":t.freq))));
-    var estado=t.meta>0?("Realizadas "+r+" de "+t.meta):(completo?"Hecho hoy":"Pendiente");
-    var btn=completo?'<span class="badge">Hecho ✓</span>':'<button class="btn btn-hecho" type="button" data-equipo="'+eq+'" data-tipo="normal">Limpio</button>';
-    return '<div class="card card-task" style="cursor:default"><div class="icon">'+t.icon+'</div><div class="info"><div class="titulo">'+t.equipo+'</div><div class="contador '+(completo?"ok":"pend")+'">'+estado+'</div></div><div class="btns"><div class="action-row"><span class="freq-label">'+labelFreq+'</span>'+btn+'</div></div></div>';
-  }).join("")||'<div style="text-align:center;color:#94a3b8;padding:30px">No hay tareas</div>';
+  var html="";
+  var hasSub=lista.some(function(t){return t.subgrupo});
+  if(hasSub){
+    var orden=["CAMARA","PASILLO"];
+    var groups={};
+    lista.forEach(function(t){var g=t.subgrupo||"OTROS";(groups[g]=groups[g]||[]).push(t)});
+    orden.forEach(function(g){
+      if(!groups[g]||!groups[g].length)return;
+      html+='<div class="grupo-titulo">'+g+'</div>';
+      groups[g].sort(function(a,b){return a.equipo.localeCompare(b.equipo,"es")}).forEach(function(t){html+=cardTareaHTML(t)});
+      delete groups[g];
+    });
+    Object.keys(groups).sort().forEach(function(g){
+      html+='<div class="grupo-titulo">'+g+'</div>';
+      groups[g].sort(function(a,b){return a.equipo.localeCompare(b.equipo,"es")}).forEach(function(t){html+=cardTareaHTML(t)});
+    });
+  } else {
+    html=lista.map(cardTareaHTML).join("");
+  }
+  document.getElementById("listaTareas").innerHTML=html||'<div style="text-align:center;color:#94a3b8;padding:30px">No hay tareas</div>';
   document.querySelectorAll("#listaTareas button[data-equipo]").forEach(function(btn){
     btn.addEventListener("click",function(){marcar(btn.getAttribute("data-equipo"),btn.getAttribute("data-tipo"))});
   });
@@ -653,7 +931,7 @@ async function confirmarOlvidoLibre(){
   await insertarRegistro({fecha:f,hora:"—",persona:user,zona:olvidoZona,equipo:olvidoEquipo,tipo:"normal"});
   await cargarRegistros();
   alert("Registrado correctamente");
-  irA("frecuencias");
+  irA(modoTrabajo==="area"?"zonas":"frecuencias");
 }
 
 async function exportarCSV(){
@@ -667,9 +945,9 @@ async function exportarCSV(){
   }
   await cargarRegistros();
   if(!registros.length){document.getElementById("msgDescarga").textContent="No hay registros.";return}
-  let csv="FECHA;HORA;TRABAJADOR;AREA;TAREA;CLASE\n";
+  let csv="AÑO;MES;FECHA;HORA;FRECUENCIA;AREA;TAREA;CLASE;RESPONSABLE\n";
   registros.slice().sort(function(a,b){return a.fecha.localeCompare(b.fecha)||(a.hora||"").localeCompare(b.hora||"")}).forEach(function(r){
-    csv+=r.fecha+";"+(r.hora||"—")+";"+r.persona+";"+r.zona+";"+r.equipo+";"+claseDe(r.tipo)+"\n";
+    csv+=anioDe(r.fecha)+";"+mesNombre(r.fecha)+";"+fechaVista(r.fecha)+";"+(r.hora||"—")+";"+frecuenciaDe(r)+";"+r.zona+";"+r.equipo+";"+claseDe(r.tipo)+";"+r.persona+"\n";
   });
   const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="limpieza_"+hoyStr+".csv";a.click();
@@ -690,12 +968,22 @@ document.getElementById("btnAtrasNombres").addEventListener("click",function(){i
 document.getElementById("btnAtrasPinTrab").addEventListener("click",function(){irA("nombres")});
 document.getElementById("btnEntrarPinTrab").addEventListener("click",validarPinTrabajador);
 document.getElementById("pinTrabInput").addEventListener("keydown",function(e){if(e.key==="Enter")validarPinTrabajador()});
-document.getElementById("btnSalirFreq").addEventListener("click",function(){irA("menu")});
+document.getElementById("btnSalirFreq").addEventListener("click",function(){irA("modo")});
+
+document.getElementById("btnSalirModo").addEventListener("click",function(){irA("menu")});
+document.getElementById("btnModoFreq").addEventListener("click",function(){modoTrabajo="freq";irA("frecuencias")});
+document.getElementById("btnModoArea").addEventListener("click",function(){modoTrabajo="area";irA("zonas")});
+
 document.getElementById("buscador").addEventListener("input",buscar);
 document.getElementById("btnOlvido").addEventListener("click",iniciarOlvido);
-document.getElementById("btnVolverZonas").addEventListener("click",function(){irA("frecuencias")});
+if(document.getElementById("buscadorAreas")){
+  document.getElementById("buscadorAreas").addEventListener("input",buscarAreas);
+  document.getElementById("btnOlvidoAreas").addEventListener("click",iniciarOlvido);
+}
+
+document.getElementById("btnVolverZonas").addEventListener("click",function(){irA(modoTrabajo==="area"?"modo":"frecuencias")});
 document.getElementById("btnVolverTareas").addEventListener("click",function(){irA("zonas")});
-document.getElementById("btnVolverOlvidoZ").addEventListener("click",function(){irA("frecuencias")});
+document.getElementById("btnVolverOlvidoZ").addEventListener("click",function(){irA(modoTrabajo==="area"?"zonas":"frecuencias")});
 document.getElementById("btnVolverOlvidoT").addEventListener("click",function(){mostrar("olvidoZona")});
 document.getElementById("btnVolverOlvidoF").addEventListener("click",function(){mostrar("olvidoTarea")});
 document.getElementById("btnConfirmarOlvido").addEventListener("click",confirmarOlvidoLibre);
