@@ -125,6 +125,7 @@ input[type="date"],input[type="password"],input[type="text"],select{width:100%;p
       <div class="menu-icon">Z</div>
       <div class="info"><div class="titulo">Por zona</div><div class="sub">Primero el lugar, luego las tareas</div></div>
     </button>
+    <button class="btn btn-olvido" type="button" id="btnOlvido"><strong>Registrar dia anterior</strong><span>Solo si olvidaste marcar una tarea ya hecha</span></button>
   </div>
 </div>
 
@@ -137,7 +138,6 @@ input[type="date"],input[type="password"],input[type="text"],select{width:100%;p
     <input type="text" class="buscador" id="buscador" placeholder="Buscar zona o tarea...">
     <div id="resultadosBusqueda" style="display:none;margin-bottom:12px"></div>
     <div id="listaFrecuencias"></div>
-    <button class="btn btn-olvido" type="button" id="btnOlvido"><strong>Registrar dia anterior</strong><span>Solo si olvidaste marcar una tarea ya hecha</span></button>
   </div>
 </div>
 
@@ -152,7 +152,6 @@ input[type="date"],input[type="password"],input[type="text"],select{width:100%;p
       <div id="resultadosBusquedaAreas" style="display:none;margin-bottom:12px"></div>
     </div>
     <div id="listaZonas"></div>
-    <button class="btn btn-olvido" type="button" id="btnOlvidoAreas"><strong>Registrar dia anterior</strong><span>Solo si olvidaste marcar una tarea ya hecha</span></button>
   </div>
 </div>
 <div id="tareas" class="screen">
@@ -1010,7 +1009,7 @@ async function confirmarOlvidoLibre(){
   await insertarRegistro({fecha:f,hora:"—",persona:user,zona:olvidoZona,equipo:olvidoEquipo,tipo:"normal"});
   await cargarRegistros();
   alert("Registrado correctamente");
-  irA(modoTrabajo==="area"?"zonas":"frecuencias");
+  irA("modo");
 }
 
 async function exportarCSV(){
@@ -1054,12 +1053,11 @@ document.getElementById("buscador").addEventListener("input",buscar);
 document.getElementById("btnOlvido").addEventListener("click",iniciarOlvido);
 if(document.getElementById("buscadorAreas")){
   document.getElementById("buscadorAreas").addEventListener("input",buscarAreas);
-  document.getElementById("btnOlvidoAreas").addEventListener("click",iniciarOlvido);
 }
 
 document.getElementById("btnVolverZonas").addEventListener("click",function(){irA(modoTrabajo==="area"?"modo":"frecuencias")});
 document.getElementById("btnVolverTareas").addEventListener("click",function(){irA("zonas")});
-document.getElementById("btnVolverOlvidoZ").addEventListener("click",function(){irA(modoTrabajo==="area"?"zonas":"frecuencias")});
+document.getElementById("btnVolverOlvidoZ").addEventListener("click",function(){irA("modo")});
 document.getElementById("btnVolverOlvidoT").addEventListener("click",function(){mostrar("olvidoZona")});
 document.getElementById("btnVolverOlvidoF").addEventListener("click",function(){mostrar("olvidoTarea")});
 document.getElementById("btnConfirmarOlvido").addEventListener("click",confirmarOlvidoLibre);
