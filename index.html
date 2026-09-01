@@ -72,7 +72,7 @@ input[type="date"],input[type="password"],input[type="text"],select{width:100%;p
 .filtros{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:12px}
 .filtros label{font-size:0.62rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.04em;display:block;margin-bottom:4px}
 .filtros select,.filtros input[type="date"]{margin-bottom:0}
-.aviso-cierre{font-size:0.72rem;color:#64748b;text-align:center;line-height:1.4;margin:18px 8px 0;padding:10px 12px;border:1px dashed #cbd5e1;border-radius:8px;background:#f8fafc}
+.aviso-cierre{font-size:0.72rem;color:#3f3f46;text-align:center;line-height:1.4;margin:18px 8px 0;padding:10px 12px;border:1px solid #e8dfc8;border-radius:8px;background:#f7f1e3}
 .login-label{font-size:0.72rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.06em;margin:4px 0 10px}
 .sub.pend{color:#b45309;font-weight:700}
 .sub.ok{color:#15803d;font-weight:600}
@@ -93,7 +93,7 @@ input[type="date"],input[type="password"],input[type="text"],select{width:100%;p
     </div>
     <div class="login-label">Inicia sesion</div>
     <div id="listaNombres"></div>
-    <p class="aviso-cierre">Al terminar, cerra la pestana. Asi la proxima vez se abre la ultima version.</p>
+    <p class="aviso-cierre">Al terminar tu sesion, cierra esta pagina. Asi la proxima vez veras la version actualizada.</p>
 </div>
 </div>
 
@@ -254,15 +254,16 @@ const DATOS={
   "BODEGA":[{equipo:"Bodega",freq:"MENSUAL",icon:"📦",meta:1,grupo:"mensual"}],
   "CAMARAS & PASILLO":[
     {equipo:"Arcon",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true,subgrupo:"PASILLO"},
-    {equipo:"Camara Carnes",freq:"DIARIA / PROFUNDA",icon:"🥩",meta:1,grupo:"diaria",dual:true,subgrupo:"CAMARA"},
-    {equipo:"Camara Congelador",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true,subgrupo:"CAMARA"},
-    {equipo:"Camara frutas/verduras",freq:"DIARIA / PROFUNDA",icon:"🥬",meta:1,grupo:"diaria",dual:true,subgrupo:"CAMARA"},
-    {equipo:"Camara Preparacion",freq:"DIARIA / PROFUNDA",icon:"🥗",meta:1,grupo:"diaria",dual:true,subgrupo:"CAMARA"},
+    {equipo:"Camara Carnes",freq:"DIARIA / PROFUNDA",icon:"🥩",meta:1,grupo:"diaria",dual:true,subgrupo:"CAMARAS"},
+    {equipo:"Camara Congelador",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true,subgrupo:"CAMARAS"},
+    {equipo:"Camara frutas/verduras",freq:"DIARIA / PROFUNDA",icon:"🥬",meta:1,grupo:"diaria",dual:true,subgrupo:"CAMARAS"},
+    {equipo:"Camara Preparacion",freq:"DIARIA / PROFUNDA",icon:"🥗",meta:1,grupo:"diaria",dual:true,subgrupo:"CAMARAS"},
     {equipo:"Congelador pasillo 1",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true,subgrupo:"PASILLO"},
     {equipo:"Congelador pasillo 2",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true,subgrupo:"PASILLO"},
     {equipo:"Congelador pasillo 3",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true,subgrupo:"PASILLO"},
     {equipo:"Congelador pasillo 4",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true,subgrupo:"PASILLO"},
     {equipo:"Congelador pasillo 5",freq:"DIARIA / PROFUNDA",icon:"❄️",meta:1,grupo:"diaria",dual:true,subgrupo:"PASILLO"},
+    {equipo:"Suelo",freq:"DIARIA / PROFUNDA",icon:"🧹",meta:1,grupo:"diaria",dual:true,subgrupo:"PASILLO"},
     {equipo:"Maquina de hielo 1",freq:"DOS veces por semana",icon:"🧊",meta:2,grupo:"2xsemana",subgrupo:"PASILLO"},
     {equipo:"Maquina de hielo 2",freq:"DOS veces por semana",icon:"🧊",meta:2,grupo:"2xsemana",subgrupo:"PASILLO"},
     {equipo:"Maquina de hielo 3",freq:"DOS veces por semana",icon:"🧊",meta:2,grupo:"2xsemana",subgrupo:"PASILLO"}
@@ -787,7 +788,7 @@ function renderTareasPorArea(){
     return h;
   }
   if(hasSub){
-    var ordenSub=["CAMARA","PASILLO"];
+    var ordenSub=["CAMARAS","PASILLO"];
     var groups={};
     lista.forEach(function(t){var g=t.subgrupo||"OTROS";(groups[g]=groups[g]||[]).push(t)});
     ordenSub.forEach(function(sg){
@@ -977,7 +978,7 @@ function renderTareas(){
   var html="";
   var hasSub=lista.some(function(t){return t.subgrupo});
   if(hasSub){
-    var orden=["CAMARA","PASILLO"];
+    var orden=["CAMARAS","PASILLO"];
     var groups={};
     lista.forEach(function(t){var g=t.subgrupo||"OTROS";(groups[g]=groups[g]||[]).push(t)});
     orden.forEach(function(g){
