@@ -7,88 +7,76 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-body{background:#f4f6f9;color:#1e293b;max-width:480px;margin:0 auto;min-height:100vh;font-size:0.875rem}
-h1{font-size:1.1rem;font-weight:700;text-align:center;margin-bottom:18px;letter-spacing:0.03em;color:#0f172a;text-transform:uppercase}
-.menu-card,.zona-card,.card,.freq-card{background:#fff;border-radius:10px;padding:6px 8px;margin-bottom:4px;border:1px solid #e2e8f0;display:flex;align-items:center;gap:12px;cursor:pointer;transition:background .15s;-webkit-tap-highlight-color:rgba(0,0,0,0.08);position:relative;z-index:1;-webkit-user-select:none;user-select:none}
+body{background:#eef1f4;color:#1e293b;max-width:480px;margin:0 auto;min-height:100vh;font-size:0.875rem}
+body.wide{max-width:1100px}
+h1{font-size:1.02rem;font-weight:700;text-align:center;letter-spacing:0.06em;color:#0f172a;text-transform:uppercase}
+.menu-card,.zona-card,.card,.freq-card{background:#fff;border-radius:10px;padding:10px 12px;margin-bottom:6px;border:1px solid #e2e8f0;display:flex;align-items:center;gap:10px;cursor:pointer;transition:background .15s;-webkit-tap-highlight-color:rgba(0,0,0,0.08);position:relative;z-index:1;-webkit-user-select:none;user-select:none}
 .menu-card:active,.zona-card:active,.freq-card:active{background:#f8fafc}
-.home-title-row{display:flex;align-items:flex-start;justify-content:center;gap:6px;margin-bottom:18px}
-.home-title-row h1{margin-bottom:0;text-align:left;flex:0 1 auto}
-.btn-lock{flex-shrink:0;margin-top:0.15em}
-.btn-lock{border:none;background:transparent;cursor:pointer;padding:4px;line-height:0;opacity:0.7;display:inline-flex;align-items:center;justify-content:center}
-.btn-lock:active{opacity:1}
+.home-title-row{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:22px;padding-top:8px}
+.home-title-row h1{margin:0}
+.btn-lock{border:none;background:transparent;cursor:pointer;padding:6px;line-height:0;opacity:0.55;display:inline-flex;align-items:center;justify-content:center;border-radius:8px}
+.btn-lock:active{opacity:1;background:#e2e8f0}
 .btn-lock svg{display:block}
-.btn-lock:active{opacity:0.85;background:#f1f5f9}
-.menu-icon,.icon{width:30px;height:30px;border-radius:8px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:0.95rem;flex-shrink:0}
+.menu-icon,.icon{width:32px;height:32px;border-radius:8px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:0.8rem;flex-shrink:0;color:#475569;font-weight:700;letter-spacing:0.02em}
 .info{flex:1;min-width:0}
-.titulo{font-weight:700;font-size:0.8rem;color:#0f172a}
-.sub{font-size:0.72rem;color:#64748b;margin-top:1px}
-.freq{font-size:0.68rem;font-weight:700;color:#3b82f6;margin-top:2px;text-transform:uppercase;letter-spacing:0.03em}
-.contador{font-size:0.72rem;font-weight:600;margin-top:2px}
-.contador.ok{color:#059669}.contador.pend{color:#d97706}
-.badge{font-size:0.62rem;font-weight:700;padding:2px 7px;border-radius:5px;background:#dcfce7;color:#166534}
-.btn{border:none;border-radius:6px;padding:3px 8px;font-weight:700;font-size:0.65rem;cursor:pointer;white-space:nowrap;line-height:1.15;min-height:0}
-.btn-hecho{background:#16a34a;color:#fff}
-.btn-aceite{background:#d97706;color:#fff}
+.titulo{font-weight:700;font-size:0.82rem;color:#0f172a}
+.sub{font-size:0.7rem;color:#64748b;margin-top:1px}
+.badge{font-size:0.62rem;font-weight:700;padding:3px 8px;border-radius:6px;background:#dcfce7;color:#166534}
+.btn{border:none;border-radius:6px;padding:5px 10px;font-weight:700;font-size:0.68rem;cursor:pointer;white-space:nowrap;line-height:1.2;min-height:28px}
+.btn-hecho{background:#15803d;color:#fff}
+.btn-aceite{background:#b45309;color:#fff}
 .badge-aceite{background:#ffedd5;color:#9a3412}
-.btn-prof{background:#dc2626;color:#fff;line-height:1.1;padding:3px 8px}
-.btn-atras{background:#f1f5f9;color:#475569;font-size:0.72rem;padding:6px 11px;font-weight:600;border:1px solid #e2e8f0}
-.btn-descarga{background:#1e293b;color:#fff;width:100%;padding:13px;font-size:0.85rem;border-radius:10px}
-.btn-olvido{background:#fde68a;color:#0f172a;width:100%;padding:12px;margin-bottom:12px;font-size:0.8rem;border-radius:10px;line-height:1.35;text-align:center;border:1px solid #fbbf24}.btn-olvido strong{display:block;font-size:0.88rem;font-weight:700;margin-bottom:2px;color:#0f172a}.btn-olvido span{display:block;font-size:0.72rem;font-weight:600;color:#1e293b}
-.btn-nombre{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:13px 15px;font-size:0.9rem;font-weight:600;width:100%;margin-bottom:8px;text-align:left;cursor:pointer;color:#0f172a}
+.btn-prof{background:#3f6212;color:#fff}
+.btn-prof small{display:inline;font-size:0.58rem;font-weight:600;opacity:0.92;margin-left:2px}
+.btn-atras{background:#fff;color:#475569;font-size:0.72rem;padding:6px 12px;font-weight:600;border:1px solid #e2e8f0}
+.btn-descarga{background:#0f172a;color:#fff;width:100%;padding:13px;font-size:0.85rem;border-radius:10px}
+.btn-olvido{background:transparent;color:#64748b;width:100%;padding:10px 8px;margin-top:18px;font-size:0.72rem;border-radius:8px;line-height:1.3;text-align:center;border:1px dashed #cbd5e1;font-weight:600}
+.btn-olvido strong{display:block;font-size:0.75rem;font-weight:700;color:#475569}
+.btn-olvido span{display:block;font-size:0.65rem;font-weight:500;color:#94a3b8;margin-top:2px}
+.btn-nombre{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;font-size:0.9rem;font-weight:600;width:100%;margin-bottom:8px;text-align:left;cursor:pointer;color:#0f172a}
 .btn-nombre:active{background:#f8fafc}
 .btns{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
 .action-row{display:flex;align-items:center;justify-content:flex-end;gap:8px}
 .freq-label{font-size:0.58rem;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap}
-.card-task{align-items:center!important;flex-wrap:nowrap;gap:8px;min-height:0}
+.card-task{align-items:center!important;flex-wrap:nowrap;gap:8px;min-height:0;padding:8px 10px}
 .card-task .info{flex:1;min-width:0}
-.card-task .titulo{font-size:0.75rem;line-height:1.2;word-break:break-word}
+.card-task .titulo{font-size:0.78rem;line-height:1.2;word-break:break-word}
 .card-task .btns{width:auto;margin-top:0;flex-shrink:0;align-items:flex-end}
 .card-task .action-row{justify-content:flex-end;width:auto;gap:4px;align-items:center;flex-wrap:wrap}
 .card-task .btn,.card-task .badge{flex-shrink:0}
 .btn-stack{display:flex;flex-direction:column;gap:3px;align-items:stretch;min-width:7.2rem}
 .btn-stack .btn,.btn-stack .badge{width:100%;text-align:center;box-sizing:border-box}
-
 .screen{display:none}.screen.active{display:block}
-.header{position:sticky;top:0;z-index:100;background:#f4f6f9;padding:14px 16px 11px;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center}
+.header{position:sticky;top:0;z-index:100;background:#eef1f4;padding:14px 16px 11px;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center}
 .nombre{font-weight:700;font-size:1rem;color:#0f172a}
 .fecha{font-size:0.72rem;color:#64748b;margin-top:1px}
 .content{padding:16px}
-.aviso{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:11px 13px;font-size:0.78rem;color:#92400e;margin-bottom:14px}
-input[type="date"],input[type="password"],input[type="text"]{width:100%;padding:11px 13px;font-size:0.85rem;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:12px;background:#fff}
-.buscador{width:100%;padding:11px 13px;font-size:0.85rem;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:12px;background:#fff}
-.buscador:focus,input:focus{outline:none;border-color:#94a3b8}
-.btn-prof small{display:inline;font-size:0.58rem;font-weight:600;opacity:0.95;margin-left:2px}
-.grupo-titulo{font-size:0.7rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.06em;margin:16px 0 8px 2px}
+.aviso{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:11px 13px;font-size:0.78rem;color:#475569;margin-bottom:14px}
+input[type="date"],input[type="password"],input[type="text"],select{width:100%;padding:11px 13px;font-size:16px;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:12px;background:#fff}
+.buscador{width:100%;padding:11px 13px;font-size:16px;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:12px;background:#fff}
+.buscador:focus,input:focus,select:focus{outline:none;border-color:#94a3b8}
+.grupo-titulo{font-size:0.68rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.07em;margin:16px 0 8px 2px}
 .grupo-titulo:first-child{margin-top:4px}
-.reg-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.reg-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.reg-fecha{font-size:0.78rem;font-weight:700;color:#0f172a}
-.reg-hora{font-size:0.72rem;color:#64748b}
-.reg-linea{font-size:0.78rem;color:#334155;margin-top:2px}
-.reg-linea b{font-weight:700;color:#0f172a}
-.reg-clase{display:inline-block;margin-top:6px;font-size:0.68rem;font-weight:700;padding:3px 8px;border-radius:6px}
-.reg-clase.basica{background:#dcfce7;color:#166534}
-.reg-clase.profunda{background:#fee2e2;color:#991b1b}
-.pin-box{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px 16px;margin-top:8px}
+.pin-box{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:24px 18px;margin-top:24px}
 .pin-box p{font-size:0.8rem;color:#64748b;margin-bottom:12px;text-align:center}
 .pin-error{color:#dc2626;font-size:0.78rem;text-align:center;margin-top:8px;display:none}
-
-.reg-table{width:100%;border-collapse:collapse;font-size:0.68rem;background:#fff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden}
-.reg-table th{background:#f1f5f9;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.03em;padding:8px 6px;text-align:left;border-bottom:1px solid #e2e8f0;white-space:nowrap}
-.reg-table td{padding:7px 6px;border-bottom:1px solid #f1f5f9;color:#0f172a;vertical-align:top}
+.reg-table{width:100%;border-collapse:collapse;font-size:0.75rem;background:#faf8f4;border:1px solid #e8e4dc}
+.reg-table th{background:#f3efe6;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;padding:10px 8px;text-align:left;border-bottom:1px solid #e8e4dc;white-space:nowrap;font-size:0.62rem}
+.reg-table td{padding:9px 8px;border-bottom:1px solid #eeeae2;color:#0f172a;white-space:nowrap}
 .reg-table tr:last-child td{border-bottom:none}
 .reg-table .muted{color:#64748b}
 .reg-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:12px}
-.filtros{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
-.filtros label{font-size:0.62rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.04em}
-.filtros select,.filtros input[type="date"]{width:100%;padding:8px 10px;font-size:0.8rem;border:1px solid #e2e8f0;border-radius:8px;background:#fff;margin-bottom:0}
-.login-label{font-size:0.78rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.04em;margin:4px 0 10px}
-.sub.pend{color:#d97706;font-weight:700}
-.sub.ok{color:#059669;font-weight:600}
-.reg-table{font-size:0.72rem;background:#faf8f4;border:1px solid #e8e4dc}
-.reg-table th{background:#f3efe6;color:#6b7280;font-size:0.62rem;padding:10px 8px;border-bottom:1px solid #e8e4dc}
-.reg-table td{padding:9px 8px;border-bottom:1px solid #eeeae2;white-space:nowrap}
-.home-title-row h1{font-size:1.05rem}
+.filtros{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:12px}
+.filtros label{font-size:0.62rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.04em;display:block;margin-bottom:4px}
+.filtros select,.filtros input[type="date"]{margin-bottom:0}
+.login-label{font-size:0.72rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.06em;margin:4px 0 10px}
+.sub.pend{color:#b45309;font-weight:700}
+.sub.ok{color:#15803d;font-weight:600}
+.modo-hint{font-size:0.72rem;color:#94a3b8;margin:-6px 0 14px}
+@media(min-width:800px){
+  body.wide .content{padding:20px 24px}
+  .filtros{grid-template-columns:1fr 1fr 1fr}
+}
 </style>
 </head>
 <body>
@@ -124,17 +112,18 @@ input[type="date"],input[type="password"],input[type="text"]{width:100%;padding:
 
 <div id="modo" class="screen">
   <div class="header">
-    <div><div class="nombre" id="nombreModo">—</div><div class="fecha">Elige como trabajar hoy</div></div>
+    <div><div class="nombre" id="nombreModo">—</div><div class="fecha">Como quieres marcar hoy</div></div>
     <button class="btn btn-atras" type="button" id="btnSalirModo">Salir</button>
   </div>
   <div class="content">
+    <p class="modo-hint" id="modoHint"></p>
     <button type="button" class="menu-card" id="btnModoFreq" style="width:100%;text-align:left;font:inherit;color:inherit;margin-bottom:8px">
-      <div class="menu-icon">📅</div>
-      <div class="info"><div class="titulo">Por frecuencia</div><div class="sub">Diaria, semanal, mensual...</div></div>
+      <div class="menu-icon">F</div>
+      <div class="info"><div class="titulo">Por frecuencia</div><div class="sub">Primero el tipo de limpieza, luego la zona</div></div>
     </button>
     <button type="button" class="menu-card" id="btnModoArea" style="width:100%;text-align:left;font:inherit;color:inherit">
-      <div class="menu-icon">📁</div>
-      <div class="info"><div class="titulo">Por zona</div><div class="sub">Cocina, camaras, heladeria...</div></div>
+      <div class="menu-icon">Z</div>
+      <div class="info"><div class="titulo">Por zona</div><div class="sub">Primero el lugar, luego las tareas</div></div>
     </button>
   </div>
 </div>
@@ -147,8 +136,8 @@ input[type="date"],input[type="password"],input[type="text"]{width:100%;padding:
   <div class="content">
     <input type="text" class="buscador" id="buscador" placeholder="Buscar zona o tarea...">
     <div id="resultadosBusqueda" style="display:none;margin-bottom:12px"></div>
-    <button class="btn btn-olvido" type="button" id="btnOlvido"><strong>¿Lo olvidaste?</strong><span>Clic aqui para registrar tareas realizadas antes de hoy</span></button>
     <div id="listaFrecuencias"></div>
+    <button class="btn btn-olvido" type="button" id="btnOlvido"><strong>Registrar dia anterior</strong><span>Solo si olvidaste marcar una tarea ya hecha</span></button>
   </div>
 </div>
 
@@ -161,9 +150,9 @@ input[type="date"],input[type="password"],input[type="text"]{width:100%;padding:
     <div id="areaExtras" style="display:none">
       <input type="text" class="buscador" id="buscadorAreas" placeholder="Buscar zona o tarea...">
       <div id="resultadosBusquedaAreas" style="display:none;margin-bottom:12px"></div>
-      <button class="btn btn-olvido" type="button" id="btnOlvidoAreas"><strong>¿Lo olvidaste?</strong><span>Clic aqui para registrar tareas realizadas antes de hoy</span></button>
     </div>
     <div id="listaZonas"></div>
+    <button class="btn btn-olvido" type="button" id="btnOlvidoAreas"><strong>Registrar dia anterior</strong><span>Solo si olvidaste marcar una tarea ya hecha</span></button>
   </div>
 </div>
 <div id="tareas" class="screen">
@@ -212,7 +201,7 @@ input[type="date"],input[type="password"],input[type="text"]{width:100%;padding:
 </div>
 
 <div id="descarga" class="screen">
-  <div class="header"><div class="nombre">Registros</div><button class="btn btn-atras" type="button" id="btnAtrasDescarga">Salir</button></div>
+  <div class="header"><div><div class="nombre">Registros</div><div class="fecha">Consulta y descarga</div></div><button class="btn btn-atras" type="button" id="btnAtrasDescarga">Salir</button></div>
   <div class="content">
     <button class="btn btn-descarga" type="button" style="margin-bottom:14px" id="btnExportar">Descargar CSV</button>
     <div class="filtros">
@@ -495,6 +484,9 @@ function irA(p){
   if(p==="modo"){
     document.getElementById("nombreModo").textContent=user||"";
     modoTrabajo=null;freqActual=null;
+    var last=localStorage.getItem("limpieza_ultimo_modo");
+    var hint=document.getElementById("modoHint");
+    if(hint) hint.textContent=last==="area"?"La ultima vez usaste: por zona":(last==="freq"?"La ultima vez usaste: por frecuencia":"Elige cada vez");
   }
   if(p==="frecuencias"){
     document.getElementById("buscador").value="";
@@ -524,10 +516,14 @@ function irA(p){
     document.getElementById("pinTrabError").style.display="none";
   }
   if(p==="descarga"){
+    document.body.classList.add("wide");
     document.getElementById("msgDescarga").textContent="";
     cargarRegistros().then(renderRegistros);
+  } else {
+    document.body.classList.remove("wide");
   }
   if(p==="menu"){user=null;pendientePin=null;modoTrabajo=null;renderNombres()}
+
   mostrar(p);
 }
 
@@ -618,8 +614,9 @@ function renderNombres(){
 }
 function elegirPersona(n){pendientePin=n;document.getElementById("pinTrabNombre").textContent=n;irA("pinTrabajador")}
 function renderFrecuencias(){
+  var short={diaria:"D", "2xsemana":"2x", semanal:"S", mensual:"M"};
   document.getElementById("listaFrecuencias").innerHTML=FRECUENCIAS.map(function(f){
-    return '<div class="freq-card" data-id="'+f.id+'" data-label="'+f.label+'"><div class="icon">'+f.icon+'</div><div class="info"><div class="titulo">'+f.label+'</div></div></div>';
+    return '<div class="freq-card" data-id="'+f.id+'" data-label="'+f.label+'"><div class="icon">'+(short[f.id]||"")+'</div><div class="info"><div class="titulo">'+f.label+'</div></div></div>';
   }).join("");
   document.querySelectorAll("#listaFrecuencias .freq-card").forEach(function(card){
     card.addEventListener("click",function(){elegirFreq(card.getAttribute("data-id"),card.getAttribute("data-label"))});
@@ -632,7 +629,7 @@ function buscar(){
   if(!q){cont.style.display="none";cont.innerHTML="";return}
   let html="";
   Object.keys(DATOS).forEach(function(zona){
-    if(zona.toLowerCase().includes(q)) html+='<div class="zona-card" data-zona="'+zona+'"><div class="icon">📁</div><div class="info"><div class="titulo">'+zona+'</div><div class="sub">Zona</div></div></div>';
+    if(zona.toLowerCase().includes(q)) html+='<div class="zona-card" data-zona="'+zona+'"><div class="icon">·</div><div class="info"><div class="titulo">'+zona+'</div><div class="sub">Zona</div></div></div>';
   });
   Object.keys(DATOS).forEach(function(zona){
     DATOS[zona].forEach(function(t){
@@ -728,7 +725,7 @@ function renderZonasTodas(){
   });
   cont.innerHTML=Object.keys(zonas).sort(function(a,b){return a.localeCompare(b,"es")}).map(function(z){
     var pend=pendientesZona(z,null);
-    return '<div class="zona-card" data-zona="'+z+'"><div class="icon">📁</div><div class="info"><div class="titulo">'+z+'</div><div class="sub '+(pend?"pend":"ok")+'">'+(pend?pend+" pendientes":"Completo")+'</div></div></div>';
+    return '<div class="zona-card" data-zona="'+z+'"><div class="icon">·</div><div class="info"><div class="titulo">'+z+'</div><div class="sub '+(pend?"pend":"ok")+'">'+(pend?pend+" pendientes":"Completo")+'</div></div></div>';
   }).join("")||'<div style="text-align:center;color:#94a3b8;padding:30px">No hay areas</div>';
   cont.querySelectorAll(".zona-card").forEach(function(card){
     card.addEventListener("click",function(){entrarZona(card.getAttribute("data-zona"))});
@@ -741,7 +738,7 @@ function buscarAreas(){
   let html="";
   Object.keys(DATOS).sort(function(a,b){return a.localeCompare(b,"es")}).forEach(function(zona){
     if(zona.toLowerCase().includes(q))
-      html+='<div class="zona-card" data-zona="'+zona+'"><div class="icon">📁</div><div class="info"><div class="titulo">'+zona+'</div><div class="sub">Zona</div></div></div>';
+      html+='<div class="zona-card" data-zona="'+zona+'"><div class="icon">·</div><div class="info"><div class="titulo">'+zona+'</div><div class="sub">Zona</div></div></div>';
   });
   Object.keys(DATOS).forEach(function(zona){
     DATOS[zona].forEach(function(t){
@@ -847,7 +844,7 @@ function renderZonas(){
   });
   cont.innerHTML=Object.keys(zonas).sort(function(a,b){return a.localeCompare(b,"es")}).map(function(z){
     var pend=pendientesZona(z,freqActual);
-    return '<div class="zona-card" data-zona="'+z+'"><div class="icon">📁</div><div class="info"><div class="titulo">'+z+'</div><div class="sub '+(pend?"pend":"ok")+'">'+(pend?pend+" pendientes":"Completo")+'</div></div></div>';
+    return '<div class="zona-card" data-zona="'+z+'"><div class="icon">·</div><div class="info"><div class="titulo">'+z+'</div><div class="sub '+(pend?"pend":"ok")+'">'+(pend?pend+" pendientes":"Completo")+'</div></div></div>';
   }).join("")||'<div style="text-align:center;color:#94a3b8;padding:30px">No hay tareas</div>';
   cont.querySelectorAll(".zona-card").forEach(function(card){
     card.addEventListener("click",function(){entrarZona(card.getAttribute("data-zona"))});
@@ -987,7 +984,7 @@ function renderTareas(){
 
 function iniciarOlvido(){
   document.getElementById("listaOlvidoZonas").innerHTML=Object.keys(DATOS).sort(function(a,b){return a.localeCompare(b,"es")}).map(function(z){
-    return '<div class="zona-card" data-zona="'+z+'"><div class="icon">📁</div><div class="info"><div class="titulo">'+z+'</div></div></div>';
+    return '<div class="zona-card" data-zona="'+z+'"><div class="icon">·</div><div class="info"><div class="titulo">'+z+'</div></div></div>';
   }).join("");
   document.querySelectorAll("#listaOlvidoZonas .zona-card").forEach(function(card){
     card.addEventListener("click",function(){olvidoElegirZona(card.getAttribute("data-zona"))});
@@ -1050,8 +1047,8 @@ document.getElementById("pinTrabInput").addEventListener("keydown",function(e){i
 document.getElementById("btnSalirFreq").addEventListener("click",function(){irA("modo")});
 
 document.getElementById("btnSalirModo").addEventListener("click",function(){irA("menu")});
-document.getElementById("btnModoFreq").addEventListener("click",function(){modoTrabajo="freq";irA("frecuencias")});
-document.getElementById("btnModoArea").addEventListener("click",function(){modoTrabajo="area";irA("zonas")});
+document.getElementById("btnModoFreq").addEventListener("click",function(){modoTrabajo="freq";localStorage.setItem("limpieza_ultimo_modo","freq");irA("frecuencias")});
+document.getElementById("btnModoArea").addEventListener("click",function(){modoTrabajo="area";localStorage.setItem("limpieza_ultimo_modo","area");irA("zonas")});
 
 document.getElementById("buscador").addEventListener("input",buscar);
 document.getElementById("btnOlvido").addEventListener("click",iniciarOlvido);
