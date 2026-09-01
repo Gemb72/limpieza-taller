@@ -72,6 +72,9 @@ input[type="date"],input[type="password"],input[type="text"],select{width:100%;p
 .filtros{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:12px}
 .filtros label{font-size:0.62rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.04em;display:block;margin-bottom:4px}
 .filtros select,.filtros input[type="date"]{margin-bottom:0}
+.falta-item{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;margin-bottom:6px;font-size:0.75rem}
+.falta-item b{display:block;color:#0f172a}
+.falta-item span{color:#64748b;font-size:0.68rem}
 .aviso-cierre{font-size:0.72rem;color:#3f3f46;text-align:center;line-height:1.4;margin:18px 8px 0;padding:10px 12px;border:1px solid #e8dfc8;border-radius:8px;background:#f7f1e3}
 .login-label{font-size:0.72rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.06em;margin:4px 0 10px}
 .sub.pend{color:#b45309;font-weight:700}
@@ -207,7 +210,8 @@ input[type="date"],input[type="password"],input[type="text"],select{width:100%;p
 <div id="descarga" class="screen">
   <div class="header"><div><div class="nombre">Registros</div><div class="fecha">Consulta y descarga</div></div><button class="btn btn-atras" type="button" id="btnAtrasDescarga">Salir</button></div>
   <div class="content">
-    <button class="btn btn-descarga" type="button" style="margin-bottom:14px" id="btnExportar">Descargar CSV</button>
+    <button class="btn btn-descarga" type="button" style="margin-bottom:10px" id="btnExportar">Descargar CSV</button>
+    <button class="btn btn-atras" type="button" id="btnResetPrueba" style="width:100%;margin-bottom:14px;padding:10px">Vaciar registros de prueba</button>
     <div class="filtros">
       <div><label>Fecha</label><input type="date" id="filtroFecha"></div>
       <div><label>Area</label><select id="filtroArea"><option value="">Todas</option></select></div>
@@ -215,6 +219,14 @@ input[type="date"],input[type="password"],input[type="text"],select{width:100%;p
     </div>
     <div id="listaRegistros"></div>
     <p id="msgDescarga" style="text-align:center;font-size:0.78rem;color:#64748b;margin-top:14px"></p>
+    <div class="grupo-titulo" style="margin-top:22px">Tareas sin registro</div>
+    <div class="filtros">
+      <div><label>Desde</label><input type="date" id="faltaDesde"></div>
+      <div><label>Hasta</label><input type="date" id="faltaHasta"></div>
+      <div><label>Area</label><select id="faltaArea"><option value="">Todas</option></select></div>
+    </div>
+    <div id="listaFaltantes"></div>
+
   </div>
 </div>
 
@@ -417,6 +429,13 @@ function getWeekKey(f){
   return fechaLocal(d);
 }
 function getMonthKey(f){return f.slice(0,7)}
+function primerDiaMes(f){return f.slice(0,8)+"01"}
+function corteArchivo(){
+  var h=hoy();
+  var lunes=getWeekKey(h);
+  var d1=primerDiaMes(h);
+  return lunes<d1?lunes:d1;
+}
 
 
 
@@ -529,7 +548,7 @@ function irA(p){
   if(p==="descarga"){
     document.body.classList.add("wide");
     document.getElementById("msgDescarga").textContent="";
-    cargarRegistros().then(renderRegistros);
+    cargarRegistros().then(function(){renderRegistros();renderFaltantes();});
   } else {
     document.body.classList.remove("wide");
   }
@@ -555,10 +574,12 @@ function validarPinTrabajador(){
 }
 
 function registrosFiltrados(){
+  /* aviso filtered below */
   var f=(document.getElementById("filtroFecha")||{}).value||"";
   var a=(document.getElementById("filtroArea")||{}).value||"";
   var p=(document.getElementById("filtroResp")||{}).value||"";
   return registros.filter(function(r){
+    if(r.tipo==="aviso") return false;
     if(f && r.fecha!==f) return false;
     if(a && r.zona!==a) return false;
     if(p && responsableDe(r)!==p) return false;
@@ -586,6 +607,13 @@ function llenarFiltrosRegistro(){
     sr.innerHTML='<option value="">Todos</option>'+resps.map(function(z){return '<option value="'+z+'">'+z+'</option>'}).join("");
     sr.value=cur2||"";
   }
+  var fa=document.getElementById("faltaArea");
+  if(fa){
+    var cur3=fa.value;
+    var zonas=Object.keys(DATOS).sort(function(x,y){return x.localeCompare(y,"es")});
+    fa.innerHTML='<option value="">Todas</option>'+zonas.map(function(z){return '<option value="'+z+'">'+z+'</option>'}).join("");
+    fa.value=cur3||"";
+  }
 }
 function renderRegistros(){
   const cont=document.getElementById("listaRegistros");
@@ -594,14 +622,14 @@ function renderRegistros(){
   if(!lista.length){cont.innerHTML='<div style="text-align:center;color:#94a3b8;padding:30px">No hay registros</div>';return}
   const orden=lista.slice().sort(function(a,b){return b.fecha.localeCompare(a.fecha)||(b.hora||"").localeCompare(a.hora||"")});
   var html='<div class="reg-scroll"><table class="reg-table"><thead><tr>'+
-    '<th>AÑO</th><th>MES</th><th>FECHA</th><th>HORA</th><th>FRECUENCIA</th><th>AREA</th><th>TAREA</th><th>CLASE</th><th>RESPONSABLE</th>'+
+    '<th>AÑO</th><th>MES</th><th>FECHA</th><th>FRECUENCIA</th><th>AREA</th><th>TAREA</th><th>CLASE</th><th>RESPONSABLE</th>'+
     '</tr></thead><tbody>';
   orden.forEach(function(r){
     html+='<tr>'+
       '<td>'+anioDe(r.fecha)+'</td>'+
       '<td>'+mesNombre(r.fecha)+'</td>'+
       '<td>'+fechaVista(r.fecha)+'</td>'+
-      '<td class="muted">'+(r.hora||"—")+'</td>'+
+      
       '<td>'+frecuenciaDe(r)+'</td>'+
       '<td>'+r.zona+'</td>'+
       '<td>'+r.equipo+'</td>'+
@@ -1031,30 +1059,207 @@ async function confirmarOlvidoLibre(){
   irA("modo");
 }
 
-async function exportarCSV(){
-  const hoyStr=hoy();
-  for(const zona of Object.keys(DATOS)){
-    for(const t of DATOS[zona]){
-      if(t.asumido&&!registros.some(function(r){return r.fecha===hoyStr&&r.zona===zona&&r.equipo===t.equipo})){
-        await insertarRegistro({fecha:hoyStr,hora:horaAleatoria(zona),persona:personaAsumida(zona),zona:zona,equipo:t.equipo,tipo:"asumido"});
-      }
+
+
+function diasDeRango(desde,hasta){
+  var out=[];
+  if(!desde||!hasta||desde>hasta) return out;
+  for(var f=desde;f<=hasta;f=sumarDias(f,1)) out.push(f);
+  return out;
+}
+function registroCubre(r,zona,t,dia){
+  if(r.tipo==="aviso") return false;
+  if(r.zona!==zona||r.equipo!==t.equipo) return false;
+  if(t.grupo==="diaria"){
+    if(t.soloProf) return r.tipo==="profunda" && getWeekKey(r.fecha)===getWeekKey(dia);
+    if(t.dual){
+      return (r.fecha===dia && r.tipo!=="profunda") || (r.tipo==="profunda" && getWeekKey(r.fecha)===getWeekKey(dia));
     }
+    return r.fecha===dia && r.tipo!=="profunda";
   }
-  await cargarRegistros();
-  var lista=registrosFiltrados().slice().sort(function(a,b){return a.fecha.localeCompare(b.fecha)||(a.hora||"").localeCompare(b.hora||"")});
-  if(!lista.length){document.getElementById("msgDescarga").textContent="No hay registros con esos filtros.";return}
-  let csv="AÑO;MES;FECHA;HORA;FRECUENCIA;AREA;TAREA;CLASE;RESPONSABLE\n";
-  lista.forEach(function(r){
-    csv+=anioDe(r.fecha)+";"+mesNombre(r.fecha)+";"+fechaVista(r.fecha)+";"+(r.hora||"—")+";"+frecuenciaDe(r)+";"+r.zona+";"+r.equipo+";"+claseDe(r.tipo)+";"+responsableDe(r)+"\n";
+  if(t.grupo==="2xsemana"||t.grupo==="semanal") return getWeekKey(r.fecha)===getWeekKey(dia);
+  if(t.grupo==="mensual") return getMonthKey(r.fecha)===getMonthKey(dia);
+  return r.fecha===dia;
+}
+function tareaSinRegistro(zona,t,dia){
+  if(t.asumido) return false;
+  if(t.dual){
+    var diaria=registros.some(function(r){return r.tipo!=="aviso"&&r.zona===zona&&r.equipo===t.equipo&&r.fecha===dia&&r.tipo!=="profunda"});
+    var prof=registros.some(function(r){return r.zona===zona&&r.equipo===t.equipo&&r.tipo==="profunda"&&getWeekKey(r.fecha)===getWeekKey(dia)});
+    return !diaria || !prof;
+  }
+  if(t.soloProf){
+    return !registros.some(function(r){return r.zona===zona&&r.equipo===t.equipo&&r.tipo==="profunda"&&getWeekKey(r.fecha)===getWeekKey(dia)});
+  }
+  if(t.meta>1 && t.metaLabels){
+    return t.metaLabels.some(function(lab){
+      return !registros.some(function(r){return r.zona===zona&&r.equipo===t.equipo&&r.tipo===lab&&r.fecha===dia});
+    });
+  }
+  if(t.grupo==="2xsemana"){
+    var n=registros.filter(function(r){return r.zona===zona&&r.equipo===t.equipo&&getWeekKey(r.fecha)===getWeekKey(dia)}).length;
+    return n<(t.meta||2);
+  }
+  return !registros.some(function(r){return registroCubre(r,zona,t,dia)});
+}
+function huecoTexto(zona,t,dia){
+  if(t.dual){
+    var diaria=registros.some(function(r){return r.tipo!=="aviso"&&r.zona===zona&&r.equipo===t.equipo&&r.fecha===dia&&r.tipo!=="profunda"});
+    var prof=registros.some(function(r){return r.zona===zona&&r.equipo===t.equipo&&r.tipo==="profunda"&&getWeekKey(r.fecha)===getWeekKey(dia)});
+    if(!diaria && !prof) return "Falta diaria y profunda";
+    if(!diaria) return "Falta diaria";
+    if(!prof) return "Falta profunda de la semana";
+  }
+  if(t.grupo==="2xsemana") return "Falta marca en la semana";
+  if(t.grupo==="semanal"||t.soloProf) return "Falta marca en la semana";
+  if(t.grupo==="mensual") return "Falta marca en el mes";
+  return "Sin registro ese dia";
+}
+function renderFaltantes(){
+  var cont=document.getElementById("listaFaltantes");
+  if(!cont) return;
+  var desde=(document.getElementById("faltaDesde")||{}).value||"";
+  var hasta=(document.getElementById("faltaHasta")||{}).value||"";
+  var area=(document.getElementById("faltaArea")||{}).value||"";
+  if(!desde && !hasta){
+    cont.innerHTML='<div style="text-align:center;color:#94a3b8;padding:12px;font-size:0.75rem">Elige un dia o un rango</div>';
+    return;
+  }
+  if(desde && !hasta) hasta=desde;
+  if(hasta && !desde) desde=hasta;
+  var dias=diasDeRango(desde,hasta);
+  if(dias.length>62){
+    cont.innerHTML='<div style="text-align:center;color:#b45309;padding:12px;font-size:0.75rem">Elige como maximo 2 meses</div>';
+    return;
+  }
+  var html="";
+  var total=0;
+  dias.forEach(function(dia){
+    var items=[];
+    Object.keys(DATOS).sort(function(a,b){return a.localeCompare(b,"es")}).forEach(function(zona){
+      if(area && zona!==area) return;
+      DATOS[zona].forEach(function(t){
+        if(tareaSinRegistro(zona,t,dia)) items.push({zona:zona,t:t});
+      });
+    });
+    if(!items.length) return;
+    html+='<div class="grupo-titulo">'+fechaVista(dia)+' · '+items.length+' sin registro</div>';
+    items.forEach(function(it){
+      total++;
+      html+='<div class="falta-item"><b>'+it.t.equipo+'</b><span>'+it.zona+' · '+it.t.freq+' · '+huecoTexto(it.zona,it.t,dia)+'</span></div>';
+    });
   });
-  const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});
-  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="limpieza_"+hoyStr+".csv";a.click();
-  renderRegistros();
-  document.getElementById("msgDescarga").textContent="CSV descargado ("+lista.length+" líneas). Las marcas siguen en la app.";
+  if(!html) html='<div style="text-align:center;color:#15803d;padding:16px;font-size:0.78rem">No hay huecos en ese periodo</div>';
+  else html='<div style="font-size:0.72rem;color:#64748b;margin-bottom:8px">'+total+' tareas sin registro</div>'+html;
+  cont.innerHTML=html;
+}
+
+async function borrarAnterioresAlCorte(){
+  var corte=corteArchivo();
+  var hoyStr=hoy();
+  registros=registros.filter(function(r){
+    if(r.tipo==="asumido") return r.fecha===hoyStr;
+    return r.fecha>=corte;
+  });
+  guardarLocal();
+  if(sb){
+    try{
+      await sb.from("registros_limpieza").delete().eq("tipo","asumido").lt("fecha",hoyStr);
+      await sb.from("registros_limpieza").delete().lt("fecha",corte);
+    }catch(e){console.warn(e)}
+  }
+}
+
+function sumarDias(f,n){
+  var d=new Date(f+"T12:00:00");
+  d.setDate(d.getDate()+n);
+  return fechaLocal(d);
+}
+function primerDiaMesAnterior(f){
+  var d=new Date(f+"T12:00:00");
+  d.setDate(1);
+  d.setMonth(d.getMonth()-1);
+  return fechaLocal(d);
+}
+function completarAsumidos(desde,hasta){
+  var hay={};
+  registros.forEach(function(r){hay[r.fecha+"|"+r.zona+"|"+r.equipo]=true});
+  var extra=[];
+  var hoyStr=hoy();
+  for(var f=desde;f<=hasta;f=sumarDias(f,1)){
+    Object.keys(DATOS).forEach(function(zona){
+      DATOS[zona].forEach(function(t){
+        if(!t.asumido) return;
+        var k=f+"|"+zona+"|"+t.equipo;
+        if(hay[k]) return;
+        var row={fecha:f,hora:horaAleatoria(zona),persona:personaAsumida(zona),zona:zona,equipo:t.equipo,tipo:"asumido"};
+        extra.push(row);
+        hay[k]=true;
+        if(f===hoyStr){
+          registros.push(row);
+        }
+      });
+    });
+  }
+  guardarLocal();
+  return extra;
+}
+async function guardarLoteSupabase(filas){
+  if(!sb||!filas.length) return;
+  try{
+    for(var i=0;i<filas.length;i+=80){
+      var trozo=filas.slice(i,i+80).map(function(r){
+        return {fecha:r.fecha,hora:r.hora||null,persona:r.persona,zona:r.zona,equipo:r.equipo,tipo:r.tipo||"normal"};
+      });
+      await sb.from("registros_limpieza").insert(trozo);
+    }
+  }catch(e){console.warn(e)}
+}
+async function exportarCSV(){
+  var msg=document.getElementById("msgDescarga");
+  try{
+    msg.textContent="Preparando archivo...";
+    const hoyStr=hoy();
+    var extra=completarAsumidos(primerDiaMesAnterior(hoyStr),hoyStr);
+    var base=registros.concat(extra.filter(function(r){return r.fecha!==hoyStr}));
+    var fFecha=(document.getElementById("filtroFecha")||{}).value||"";
+    var fArea=(document.getElementById("filtroArea")||{}).value||"";
+    var fResp=(document.getElementById("filtroResp")||{}).value||"";
+    var lista=base.filter(function(r){
+      if(r.tipo==="aviso") return false;
+      if(fFecha && r.fecha!==fFecha) return false;
+      if(fArea && r.zona!==fArea) return false;
+      if(fResp && responsableDe(r)!==fResp) return false;
+      return true;
+    }).slice().sort(function(x,y){return x.fecha.localeCompare(y.fecha)||(x.hora||"").localeCompare(y.hora||"")});
+    if(!lista.length){msg.textContent="No hay registros con esos filtros.";return}
+    let csv="AÑO;MES;FECHA;FRECUENCIA;AREA;TAREA;CLASE;RESPONSABLE\n";
+    lista.forEach(function(r){
+      csv+=anioDe(r.fecha)+";"+mesNombre(r.fecha)+";"+fechaVista(r.fecha)+";"+frecuenciaDe(r)+";"+r.zona+";"+r.equipo+";"+claseDe(r.tipo)+";"+responsableDe(r)+"\n";
+    });
+    const blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8;"});
+    const link=document.createElement("a");
+    link.href=URL.createObjectURL(blob);
+    link.download="limpieza_"+hoyStr+".csv";
+    document.body.appendChild(link);
+    link.click();
+    setTimeout(function(){URL.revokeObjectURL(link.href);link.remove()},1500);
+    await guardarLoteSupabase(extra);
+    await borrarAnterioresAlCorte();
+    renderRegistros();
+    msg.textContent="CSV descargado ("+lista.length+" lineas). Se quitaron registros anteriores a "+fechaVista(corteArchivo())+".";
+  }catch(e){
+    console.warn(e);
+    msg.textContent="Error al descargar. Prueba de nuevo.";
+  }
 }
 
 document.getElementById("btnRestringida").addEventListener("click",function(){irA("pin")});
 document.getElementById("btnAtrasNombres").addEventListener("click",function(){irA("menu")});
+["faltaDesde","faltaHasta","faltaArea"].forEach(function(id){
+  var el=document.getElementById(id);
+  if(el) el.addEventListener("change",renderFaltantes);
+});
 ["filtroFecha","filtroArea","filtroResp"].forEach(function(id){
   var el=document.getElementById(id);
   if(el) el.addEventListener("change",renderRegistros);
@@ -1085,6 +1290,16 @@ document.getElementById("btnAccederPin").addEventListener("click",validarPin);
 document.getElementById("pinInput").addEventListener("keydown",function(e){if(e.key==="Enter")validarPin()});
 document.getElementById("btnAtrasDescarga").addEventListener("click",function(){irA("menu")});
 document.getElementById("btnExportar").addEventListener("click",exportarCSV);
+document.getElementById("btnResetPrueba").addEventListener("click",async function(){
+  if(!confirm("Se van a borrar TODOS los registros de la app y de Supabase. Continuar?")) return;
+  registros=[];
+  guardarLocal();
+  if(sb){
+    try{await sb.from("registros_limpieza").delete().neq("id",0)}catch(e){console.warn(e)}
+  }
+  renderRegistros();
+  document.getElementById("msgDescarga").textContent="Listado vaciado.";
+});
 
 cargarRegistros();renderNombres();
 })();
