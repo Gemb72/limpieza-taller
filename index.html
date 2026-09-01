@@ -592,7 +592,7 @@ function renderRegistros(){
   llenarFiltrosRegistro();
   var lista=registrosFiltrados();
   if(!lista.length){cont.innerHTML='<div style="text-align:center;color:#94a3b8;padding:30px">No hay registros</div>';return}
-  const orden=lista.slice().sort(function(a,b){return a.fecha.localeCompare(b.fecha)||(a.hora||"").localeCompare(b.hora||"")});
+  const orden=lista.slice().sort(function(a,b){return b.fecha.localeCompare(a.fecha)||(b.hora||"").localeCompare(a.hora||"")});
   var html='<div class="reg-scroll"><table class="reg-table"><thead><tr>'+
     '<th>AÑO</th><th>MES</th><th>FECHA</th><th>HORA</th><th>FRECUENCIA</th><th>AREA</th><th>TAREA</th><th>CLASE</th><th>RESPONSABLE</th>'+
     '</tr></thead><tbody>';
