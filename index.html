@@ -395,8 +395,27 @@ const DATOS={
 let user=null,modoTrabajo=null,freqActual=null,zonaActual=null,olvidoZona=null,olvidoEquipo=null,pendientePin=null;
 let registros=JSON.parse(localStorage.getItem("limpieza_v29")||"[]");
 
-function hoy(){return new Date().toISOString().slice(0,10)}
-function getWeekKey(f){const d=new Date(f+"T12:00:00");const o=new Date(d.getFullYear(),0,1);return d.getFullYear()+"-W"+Math.ceil((((d-o)/86400000)+o.getDay()+1)/7)}
+function fechaLocal(d){
+  var y=d.getFullYear();
+  var m=String(d.getMonth()+1).padStart(2,"0");
+  var day=String(d.getDate()).padStart(2,"0");
+  return y+"-"+m+"-"+day;
+}
+function ahoraOperativa(){
+  var d=new Date();
+  if(d.getHours()<5 || (d.getHours()===5 && d.getMinutes()<45)){
+    d.setDate(d.getDate()-1);
+  }
+  return d;
+}
+function hoy(){return fechaLocal(ahoraOperativa())}
+function getWeekKey(f){
+  var d=new Date(f+"T12:00:00");
+  var day=d.getDay();
+  var diff=day===0?-6:1-day;
+  d.setDate(d.getDate()+diff);
+  return fechaLocal(d);
+}
 function getMonthKey(f){return f.slice(0,7)}
 
 
@@ -463,14 +482,6 @@ async function insertarRegistro(r){
         fecha:r.fecha,hora:r.hora||null,persona:r.persona,zona:r.zona,equipo:r.equipo,tipo:r.tipo||"normal"
       });
     }catch(e){console.warn(e)}
-  }
-}
-
-async function borrarTodosRegistros(){
-  registros=[];
-  guardarLocal();
-  if(sb){
-    try{await sb.from("registros_limpieza").delete().neq("id",0)}catch(e){console.warn(e)}
   }
 }
 
@@ -598,8 +609,8 @@ function renderRegistros(){
 
 
 function renderNombres(){
-  document.getElementById("listaNombres").innerHTML=Object.keys(PERSONAS).map(function(p){
-    return '<button class="btn-nombre" type="button" data-persona="'+p+'">'+p+'</button>';
+  document.getElementById("listaNombres").innerHTML=Object.keys(PERSONAS).map(function(p,i){
+    return '<button class="btn-nombre" type="button" data-persona="'+p+'">'+(i+1)+'. '+p+'</button>';
   }).join("");
   document.querySelectorAll("#listaNombres .btn-nombre").forEach(function(btn){
     btn.addEventListener("click",function(){elegirPersona(btn.getAttribute("data-persona"))});
@@ -1015,16 +1026,16 @@ async function exportarCSV(){
     }
   }
   await cargarRegistros();
-  if(!registros.length){document.getElementById("msgDescarga").textContent="No hay registros.";return}
+  var lista=registrosFiltrados().slice().sort(function(a,b){return a.fecha.localeCompare(b.fecha)||(a.hora||"").localeCompare(b.hora||"")});
+  if(!lista.length){document.getElementById("msgDescarga").textContent="No hay registros con esos filtros.";return}
   let csv="AÑO;MES;FECHA;HORA;FRECUENCIA;AREA;TAREA;CLASE;RESPONSABLE\n";
-  registros.slice().sort(function(a,b){return a.fecha.localeCompare(b.fecha)||(a.hora||"").localeCompare(b.hora||"")}).forEach(function(r){
+  lista.forEach(function(r){
     csv+=anioDe(r.fecha)+";"+mesNombre(r.fecha)+";"+fechaVista(r.fecha)+";"+(r.hora||"—")+";"+frecuenciaDe(r)+";"+r.zona+";"+r.equipo+";"+claseDe(r.tipo)+";"+responsableDe(r)+"\n";
   });
   const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="limpieza_"+hoyStr+".csv";a.click();
-  await borrarTodosRegistros();
   renderRegistros();
-  document.getElementById("msgDescarga").textContent="CSV descargado. Registros borrados.";
+  document.getElementById("msgDescarga").textContent="CSV descargado ("+lista.length+" lineas). Las marcas siguen en la app.";
 }
 
 document.getElementById("btnRestringida").addEventListener("click",function(){irA("pin")});
