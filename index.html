@@ -612,10 +612,17 @@ function renderNombres(){
   });
 }
 function elegirPersona(n){pendientePin=n;document.getElementById("pinTrabNombre").textContent=n;irA("pinTrabajador")}
+function pendientesFreq(grupo){
+  var n=0;
+  Object.keys(DATOS).forEach(function(zona){n+=pendientesZona(zona,grupo)});
+  return n;
+}
 function renderFrecuencias(){
   var short={diaria:"D", "2xsemana":"2x", semanal:"S", mensual:"M"};
   document.getElementById("listaFrecuencias").innerHTML=FRECUENCIAS.map(function(f){
-    return '<div class="freq-card" data-id="'+f.id+'" data-label="'+f.label+'"><div class="icon">'+(short[f.id]||"")+'</div><div class="info"><div class="titulo">'+f.label+'</div></div></div>';
+    var pend=pendientesFreq(f.id);
+    var sub=pend?(pend+" pendientes"):"Completo";
+    return '<div class="freq-card" data-id="'+f.id+'" data-label="'+f.label+'"><div class="icon">'+(short[f.id]||"")+'</div><div class="info"><div class="titulo">'+f.label+'</div><div class="sub '+(pend?"pend":"ok")+'">'+sub+'</div></div></div>';
   }).join("");
   document.querySelectorAll("#listaFrecuencias .freq-card").forEach(function(card){
     card.addEventListener("click",function(){elegirFreq(card.getAttribute("data-id"),card.getAttribute("data-label"))});
