@@ -88,17 +88,17 @@ input[type="date"],input[type="password"],input[type="text"],select{width:100%;p
 <div id="menu" class="screen active">
   <div class="content">
     <div class="home-title-row">
-      <button type="button" id="btnRestringida" class="btn-lock" title="Area restringida" aria-label="Area restringida"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" stroke="#0f172a" stroke-width="2"/><path d="M8 11V7a4 4 0 118 0v4" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/></svg></button>
+      <button type="button" id="btnRestringida" class="btn-lock" title="Área restringida" aria-label="Área restringida"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" stroke="#0f172a" stroke-width="2"/><path d="M8 11V7a4 4 0 118 0v4" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/></svg></button>
       <h1>OFFICE & LIMPIEZA</h1>
     </div>
-    <div class="login-label">Inicia sesion</div>
+    <div class="login-label">Inicia sesión</div>
     <div id="listaNombres"></div>
-    <p class="aviso-cierre">Al terminar tu sesion, cierra esta pagina. Asi la proxima vez veras la version actualizada.</p>
+    <p class="aviso-cierre">Al terminar tu sesión, cierra esta página. Así la próxima vez verás la versión actualizada.</p>
 </div>
 </div>
 
 <div id="nombres" class="screen">
-  <div class="header"><div class="nombre">Inicia sesion</div><button class="btn btn-atras" type="button" id="btnAtrasNombres">Salir</button></div>
+  <div class="header"><div class="nombre">Inicia sesión</div><button class="btn btn-atras" type="button" id="btnAtrasNombres">Salir</button></div>
   <div class="content" id="listaNombresOld"></div>
 </div>
 
@@ -117,7 +117,7 @@ input[type="date"],input[type="password"],input[type="text"],select{width:100%;p
 
 <div id="modo" class="screen">
   <div class="header">
-    <div><div class="nombre" id="nombreModo">—</div><div class="fecha">Como quieres marcar hoy</div></div>
+    <div><div class="nombre" id="nombreModo">—</div><div class="fecha">Cómo quieres marcar hoy</div></div>
     <button class="btn btn-atras" type="button" id="btnSalirModo">Salir</button>
   </div>
   <div class="content">
@@ -130,7 +130,7 @@ input[type="date"],input[type="password"],input[type="text"],select{width:100%;p
       <div class="menu-icon">Z</div>
       <div class="info"><div class="titulo">Por zona</div><div class="sub">Primero el lugar, luego las tareas</div></div>
     </button>
-    <button class="btn btn-olvido" type="button" id="btnOlvido"><strong>Registrar dia anterior</strong><span>Solo si olvidaste marcar una tarea ya hecha</span></button>
+    <button class="btn btn-olvido" type="button" id="btnOlvido"><strong>Registrar día anterior</strong><span>Solo si olvidaste marcar una tarea ya hecha</span></button>
   </div>
 </div>
 
@@ -168,7 +168,7 @@ input[type="date"],input[type="password"],input[type="text"],select{width:100%;p
 </div>
 
 <div id="olvidoZona" class="screen">
-  <div class="header"><div class="nombre">Olvide marcar</div><button class="btn btn-atras" type="button" id="btnVolverOlvidoZ">Volver</button></div>
+  <div class="header"><div class="nombre">Olvidé marcar</div><button class="btn btn-atras" type="button" id="btnVolverOlvidoZ">Volver</button></div>
   <div class="content">
     <div class="aviso">Elige la zona de la tarea que hiciste y no marcaste.</div>
     <div id="listaOlvidoZonas"></div>
@@ -184,7 +184,7 @@ input[type="date"],input[type="password"],input[type="text"],select{width:100%;p
 </div>
 
 <div id="olvidoFecha" class="screen">
-  <div class="header"><div class="nombre">Que dia lo hiciste?</div><button class="btn btn-atras" type="button" id="btnVolverOlvidoF">Volver</button></div>
+  <div class="header"><div class="nombre">¿Qué día lo hiciste?</div><button class="btn btn-atras" type="button" id="btnVolverOlvidoF">Volver</button></div>
   <div class="content">
     <div class="aviso" id="olvidoResumen"></div>
     <input type="date" id="fechaLibre" max="">
@@ -193,7 +193,7 @@ input[type="date"],input[type="password"],input[type="text"],select{width:100%;p
 </div>
 
 <div id="pin" class="screen">
-  <div class="header"><div class="nombre">Area restringida</div><button class="btn btn-atras" type="button" id="btnAtrasPin">Salir</button></div>
+  <div class="header"><div class="nombre">Área restringida</div><button class="btn btn-atras" type="button" id="btnAtrasPin">Salir</button></div>
   <div class="content">
     <div class="pin-box">
       <p>Introduce el PIN de acceso</p>
@@ -497,7 +497,7 @@ function irA(p){
     modoTrabajo=null;freqActual=null;
     var last=localStorage.getItem("limpieza_ultimo_modo");
     var hint=document.getElementById("modoHint");
-    if(hint) hint.textContent=last==="area"?"La ultima vez usaste: por zona":(last==="freq"?"La ultima vez usaste: por frecuencia":"Elige cada vez");
+    if(hint) hint.textContent=last==="area"?"La última vez usaste: por zona":(last==="freq"?"La última vez usaste: por frecuencia":"Elige cada vez");
   }
   if(p==="frecuencias"){
     document.getElementById("buscador").value="";
@@ -508,7 +508,7 @@ function irA(p){
     document.getElementById("nombreUser2").textContent=user||"";
     var extras=document.getElementById("areaExtras");
     if(modoTrabajo==="area"){
-      document.getElementById("freqActual").textContent="Elige area";
+      document.getElementById("freqActual").textContent="Elige área";
       if(extras) extras.style.display="block";
       document.getElementById("btnVolverZonas").textContent="Volver";
       renderZonasTodas();
@@ -655,7 +655,7 @@ function buscar(){
         html+='<div class="card" style="cursor:pointer" data-zona="'+zona+'" data-grupo="'+t.grupo+'"><div class="icon">'+t.icon+'</div><div class="info"><div class="titulo">'+t.equipo+'</div><div class="sub">'+zona+' · '+t.freq+'</div></div></div>';
     });
   });
-  cont.innerHTML=html||'<div style="text-align:center;color:#94a3b8;padding:12px;font-size:0.8rem">No se encontro</div>';
+  cont.innerHTML=html||'<div style="text-align:center;color:#94a3b8;padding:12px;font-size:0.8rem">No se encontró</div>';
   cont.style.display="block";
   cont.querySelectorAll("[data-zona]").forEach(function(el){
     el.addEventListener("click",function(){
@@ -744,7 +744,7 @@ function renderZonasTodas(){
   cont.innerHTML=Object.keys(zonas).sort(function(a,b){return a.localeCompare(b,"es")}).map(function(z){
     var pend=pendientesZona(z,null);
     return '<div class="zona-card" data-zona="'+z+'"><div class="icon">·</div><div class="info"><div class="titulo">'+z+'</div><div class="sub '+(pend?"pend":"ok")+'">'+(pend?pend+" pendientes":"Completo")+'</div></div></div>';
-  }).join("")||'<div style="text-align:center;color:#94a3b8;padding:30px">No hay areas</div>';
+  }).join("")||'<div style="text-align:center;color:#94a3b8;padding:30px">No hay áreas</div>';
   cont.querySelectorAll(".zona-card").forEach(function(card){
     card.addEventListener("click",function(){entrarZona(card.getAttribute("data-zona"))});
   });
@@ -765,7 +765,7 @@ function buscarAreas(){
         html+='<div class="card" style="cursor:pointer" data-zona="'+zona+'"><div class="icon">'+t.icon+'</div><div class="info"><div class="titulo">'+t.equipo+'</div><div class="sub">'+zona+' · '+t.freq+'</div></div></div>';
     });
   });
-  cont.innerHTML=html||'<div style="text-align:center;color:#94a3b8;padding:12px;font-size:0.8rem">No se encontro</div>';
+  cont.innerHTML=html||'<div style="text-align:center;color:#94a3b8;padding:12px;font-size:0.8rem">No se encontró</div>';
   cont.style.display="block";
   cont.querySelectorAll("[data-zona]").forEach(function(el){
     el.addEventListener("click",function(){entrarZona(el.getAttribute("data-zona"))});
@@ -1050,7 +1050,7 @@ async function exportarCSV(){
   const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="limpieza_"+hoyStr+".csv";a.click();
   renderRegistros();
-  document.getElementById("msgDescarga").textContent="CSV descargado ("+lista.length+" lineas). Las marcas siguen en la app.";
+  document.getElementById("msgDescarga").textContent="CSV descargado ("+lista.length+" líneas). Las marcas siguen en la app.";
 }
 
 document.getElementById("btnRestringida").addEventListener("click",function(){irA("pin")});
